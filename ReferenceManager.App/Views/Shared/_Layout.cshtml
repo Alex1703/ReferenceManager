@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ReferenceManager.App</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ReferenceManager.App.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+<body>
+
+    <div class="dashboard">
+        <div class="dashboard-nav">
+            <header>
+                <a href="principal.html" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#" class="brand-logo">
+                    <i class="fa-solid fa-building-circle-arrow-right"></i> <span>Manager References</span>
+                </a>
+            </header>
+            <nav class="dashboard-nav-list">
+                <a href="principal.html" class="dashboard-nav-item">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+
+                <div class="dashboard-nav-dropdown">
+                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                        <i class="fas fa-cogs"></i> Administracion Usuarios
+                    </a>
+                    <div class="dashboard-nav-dropdown-menu">
+                        <a asp-controller="Usuarios" asp-action="index" class="dashboard-nav-dropdown-item">Usuarios</a>
+                        <a asp-controller="Perfils" asp-action="index" class="dashboard-nav-dropdown-item">Perfiles</a>
+                        <a asp-controller="Accesoes" asp-action="index" class="dashboard-nav-dropdown-item">Accesos</a>
+                    </div>
+                </div>
+
+                <div class="dashboard-nav-dropdown">
+                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                        <i class="fas fa-photo-video"></i> Administracion Plantillas
+                    </a>
+                    <div class="dashboard-nav-dropdown-menu">
+                        <a asp-controller="Plantillas" asp-action="index" class="dashboard-nav-dropdown-item">Plantilla</a>
+                        <a asp-controller="PlantillaCampoes" asp-action="index" class="dashboard-nav-dropdown-item">Plantilla Campos</a>
+                        <a asp-controller="Campoes" asp-action="index" class="dashboard-nav-dropdown-item">Campos</a>
+                    </div>
+                </div>
+                <div class="dashboard-nav-dropdown">
+                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                        <i class="fas fa-users"></i>
+                        Referencias
+                    </a>
+                    <div class="dashboard-nav-dropdown-menu">
+                        <a href="Refereciacion\Gestionar.html" class="dashboard-nav-dropdown-item">Gestionar</a>
+                    </div>
+                </div>
+                <div class="dashboard-nav-dropdown">
+                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                        <i class="fas fa-money-check-alt"></i> Reportes
+                    </a>
+                    <div class="dashboard-nav-dropdown-menu">
+                        <a href="Reportes\ConsultarCliente.html" class="dashboard-nav-dropdown-item">Consultar Cliente</a>
+                        <a href="Reportes\GenerarPDF.html" class="dashboard-nav-dropdown-item">Generar PDF's</a>
+
+                    </div>
+                </div>
+                <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a href="#"
+                                                                                                   class="dashboard-nav-item">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <div class="nav-item-divider"></div>
+                <a href="#" class="dashboard-nav-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <div class="dashboard-app">
+            <header class="dashboard-toolbar">
+                <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+            </header>
+            <div class="dashboard-content">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
