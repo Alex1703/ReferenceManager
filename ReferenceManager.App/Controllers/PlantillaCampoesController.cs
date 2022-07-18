@@ -48,8 +48,8 @@ namespace ReferenceManager.App.Controllers
         // GET: PlantillaCampoes/Create
         public IActionResult Create()
         {
-            ViewData["FkCampo"] = new SelectList(_context.Campos, "Id", "Id");
-            ViewData["FkPlantilla"] = new SelectList(_context.Plantillas, "Id", "Id");
+            ViewData["FkCampo"] = new SelectList(_context.Campos, "Id", "Nombre");
+            ViewData["FkPlantilla"] = new SelectList(_context.Plantillas, "Id", "Nombre");
             return View();
         }
 

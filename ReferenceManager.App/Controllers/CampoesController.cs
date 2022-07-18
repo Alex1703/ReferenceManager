@@ -47,7 +47,7 @@ namespace ReferenceManager.App.Controllers
         // GET: Campoes/Create
         public IActionResult Create()
         {
-            ViewData["FkTipoCampo"] = new SelectList(_context.TipoCampos, "Id", "Id");
+            ViewData["FkTipoCampo"] = new SelectList(_context.TipoCampos, "Id", "Nombre");
             return View();
         }
 

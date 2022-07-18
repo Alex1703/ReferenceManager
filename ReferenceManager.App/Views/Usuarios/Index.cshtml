@@ -19,12 +19,18 @@
                 @Html.DisplayNameFor(model => model.Identificacion)
             </th>
             <th>
-                Cambio de Contraseña
+                @Html.DisplayNameFor(model => model.EnLinea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
             </th>
             <th>
                 Perfil
             </th>
-            <th>Opciones</th>
+            <th>
+                Opciones
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +44,10 @@
                 @Html.DisplayFor(modelItem => item.Identificacion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CambioContrasena)
+                @Html.DisplayFor(modelItem => item.EnLinea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FkPerfilNavigation.Nombre)

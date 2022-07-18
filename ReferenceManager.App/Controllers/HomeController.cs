@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ReferenceManager.App.Core.Filters;
 using ReferenceManager.App.Models;
 using System.Diagnostics;
 
@@ -8,13 +9,28 @@ namespace ReferenceManager.App.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ITokenService _tokenService;
+
+        public HomeController(ILogger<HomeController> logger, ITokenService tokenService)
         {
             _logger = logger;
+            _tokenService = tokenService;
         }
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("JWToken") != null)
+            {
+                var result = _tokenService.ValidateToken(HttpContext.Session.GetString("JWToken"));
+                if (result == null)
+                {
+                    return RedirectToAction("Index","Auth");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Auth");
+            }
             return View();
         }
 

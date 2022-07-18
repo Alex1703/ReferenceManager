@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
+using ReferenceManager.App.Models.Login;
 
 namespace ReferenceManager.App.Controllers
 {
@@ -58,16 +61,20 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Activio,Nombre,Identificacion,Contrasena,FkPerfil")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Nombre,Identificacion,Correo,FkPerfil")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.CambioContrasena = DateTime.Now.AddMonths(int.Parse(_configuration.GetSection("PasswordChangePeriod").Value));
+                CreatePasswordHash(_configuration.GetSection("PasswordDefault").Value, out byte[] passwordHast, out byte[] passwordSalt);
+                usuario.Contrasena = passwordHast;
+                usuario.ContrasenaKey = passwordSalt;
+                usuario.Correo = usuario.Correo.ToLower();
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Id", usuario.FkPerfil);
+            ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Nombre", usuario.FkPerfil);
             return View(usuario);
         }
 
@@ -93,7 +100,7 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Activio,Nombre,Identificacion,Contrasena,CambioContrasena,FkPerfil")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Activio,Nombre,Identificacion,Contrasena,ContrasenaKey,EnLinea,Correo,CambioContrasena,FkPerfil")] Usuario usuario)
         {
             if (id != usuario.Id)
             {
@@ -166,5 +173,15 @@ namespace ReferenceManager.App.Controllers
         {
           return (_context.Usuarios?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        private void CreatePasswordHash(string password, out byte[] passwordHast, out byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHast = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            }
+        }
+
     }
 }
