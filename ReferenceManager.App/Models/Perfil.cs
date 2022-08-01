@@ -8,17 +8,15 @@ namespace ReferenceManager.App.Models
         public Perfil()
         {
             DetallePerfilAccesos = new HashSet<DetallePerfilAcceso>();
-            PerfilAnalista = new HashSet<PerfilAnalistum>();
             Usuarios = new HashSet<Usuario>();
         }
 
         public int Id { get; set; }
-        public string? Nombre { get; set; }
-        public string? Descripcion { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
         public bool? Activio { get; set; }
 
         public virtual ICollection<DetallePerfilAcceso> DetallePerfilAccesos { get; set; }
-        public virtual ICollection<PerfilAnalistum> PerfilAnalista { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

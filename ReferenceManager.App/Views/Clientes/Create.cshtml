@@ -1,0 +1,293 @@
+﻿@model ReferenceManager.App.Models.Cliente
+
+
+@{
+    ViewData["Title"] = "Create";
+    Comercial comercial = null;
+    var txtidentificacion = "";
+    var isVisible = "none";
+    
+    var temp = ViewBag.isTitular != null ? ViewBag.isTitular : "0";
+
+    if (ViewBag.Comercial != null)
+    {
+        comercial = (Comercial)ViewBag.Comercial;
+        txtidentificacion = comercial.Cedula;
+        isVisible = "";
+    }
+}
+
+<h1>Cargue Referencia</h1>
+
+<hr />
+<form asp-action="GetComercialById">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Tipo de Cliente:</label>
+                <select id="isTitular" name="isTitular" class="form-select">
+                    <option value="0">Seleccione</option>
+                    <option value="1">Titular</option>
+                    <option value="2">Codeudor</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" id="formValidar" style="display:@isVisible">
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <label class="control-label" id="lblIdentificacion">Identificacion del Comercial:</label>
+                <input type="text" id="idComercial" class="form-control" name="idComercial" value="@txtidentificacion" />
+            </div>
+            <br />
+            <input type="submit" value="Validar" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+@if (comercial != null)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Nombre Asesor: @comercial.Nombre</label><br />
+                <label class="control-label">Regional: @comercial.FkZonaNavigation.Nombre</label><br />
+                <label class="control-label">Ciudad: @comercial.FkZonaNavigation.Ciudad</label><br />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <br />
+
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="PrimerApellido" class="control-label"></label>
+                            <input asp-for="PrimerNombre" class="form-control" />
+                            <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="SegundoNombre" class="control-label"></label>
+                            <input asp-for="SegundoNombre" class="form-control" />
+                            <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="PrimerApellido" class="control-label"></label>
+                            <input asp-for="PrimerApellido" class="form-control" />
+                            <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="SegundoApellido" class="control-label"></label>
+                            <input asp-for="SegundoApellido" class="form-control" />
+                            <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TipoIdentificacion" class="control-label"></label>
+                            <input asp-for="TipoIdentificacion" class="form-control" />
+                            <span asp-validation-for="TipoIdentificacion" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="NoIdentificacion" class="control-label"></label>
+                            <input asp-for="NoIdentificacion" class="form-control" />
+                            <span asp-validation-for="NoIdentificacion" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="NombreNegocio" class="control-label"></label>
+                            <input asp-for="NombreNegocio" class="form-control" />
+                            <span asp-validation-for="NombreNegocio" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="DireccionNegocio" class="control-label"></label>
+                            <input asp-for="DireccionNegocio" class="form-control" />
+                            <span asp-validation-for="DireccionNegocio" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TiempoOperacionAno" class="control-label"></label>
+                            <input asp-for="TiempoOperacionAno" class="form-control" />
+                            <span asp-validation-for="TiempoOperacionAno" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TiempoOperacionMese" class="control-label"></label>
+                            <input asp-for="TiempoOperacionMese" class="form-control" />
+                            <span asp-validation-for="TiempoOperacionMese" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TiempoEstablecimientoAno" class="control-label"></label>
+                            <input asp-for="TiempoEstablecimientoAno" class="form-control" />
+                            <span asp-validation-for="TiempoEstablecimientoAno" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TiempoEstablecimientoMes" class="control-label"></label>
+                            <input asp-for="TiempoEstablecimientoMes" class="form-control" />
+                            <span asp-validation-for="TiempoEstablecimientoMes" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TipoLocal" class="control-label"></label>
+                            <select id="Cliente_TipoLocal" name="Cliente_TipoLocal" class="form-select">
+                                <option value="Arrendado">Arrendado</option>
+                                <option value="Propio">Propio</option>
+                                <option value="Familiar">Familiar</option>
+                            </select>
+                            <span asp-validation-for="TipoLocal" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="TipoVivienda" class="control-label"></label>
+                            <select class="form-select" id="Cliente_TipoVivienda" name="Cliente_TipoVivienda">
+                                <option value="Arrendada">Arrendada</option>
+                                <option value="Propio">Propio</option>
+                                <option value="Familiar">Familiar</option>
+                            </select>
+                            <span asp-validation-for="TipoVivienda" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="EstadoCivil" class="control-label"></label>
+                            <select class="form-select" id="Cliente_EstadoCivil" name="Cliente_EstadoCivil">
+                                <option value="Soltero">Soltero</option>
+                                <option value="Casado">Casado</option>
+                                <option value="Separado">Separado</option>
+                                <option value="Divorciado">Divorciado</option>
+                                <option value="Union Libre">Union Libre</option>
+                                <option value="Viudo">Viudo</option>
+                            </select>
+                            <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="ClaseCiente" class="control-label"></label>
+                            <select class="form-select" id="Cliente_ClaseCiente" name="Cliente_ClaseCiente">
+                                <option value="Nuevo">Nuevo</option>
+                                <option value="Retanqueo">Retanqueo</option>
+                                <option value="Renovacion">Renovacion</option>
+                            </select>
+                            <span asp-validation-for="ClaseCiente" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="FkTipoCliente" class="control-label"></label>
+                            <select asp-for="FkTipoCliente" class="form-control" asp-items="ViewBag.FkTipoCliente"></select>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <hr />
+    <br />
+
+}
+<div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $("#isTitular option[value='@temp']").prop("selected", "selected");
+            $("#FkTipoCliente option[value='@temp']").prop("selected", "selected");
+
+        });
+
+
+        $("#isTitular").change(function() {
+            debugger;
+            var value = $(this).val();
+            var Identificacion = "";
+
+            $("#formValidar").show();
+
+            if (value == "1") {
+                Identificacion = "Identificacion del Comercial:";
+            }
+            else {
+                Identificacion = "Identificacion del Titular:";
+            }
+
+            $("#lblIdentificacion").text(Identificacion);
+        });
+
+
+
+
+
+
+    </script>
+    }
+

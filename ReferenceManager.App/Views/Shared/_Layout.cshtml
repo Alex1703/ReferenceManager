@@ -52,7 +52,7 @@
                         Referencias
                     </a>
                     <div class="dashboard-nav-dropdown-menu">
-                        <a href="Refereciacion\Gestionar.html" class="dashboard-nav-dropdown-item">Gestionar</a>
+                        <a asp-controller="Clientes" asp-action="Create" class="dashboard-nav-dropdown-item">Gestionar</a>
                     </div>
                 </div>
                 <div class="dashboard-nav-dropdown">
@@ -76,8 +76,7 @@
         <div class="dashboard-app">
             <header class="dashboard-toolbar">
                 <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
-                <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
-                <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
+                
             </header>
             <div class="dashboard-content">
                 <div class="container">
@@ -94,6 +93,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/main.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

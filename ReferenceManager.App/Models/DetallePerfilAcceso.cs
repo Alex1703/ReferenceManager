@@ -10,7 +10,7 @@ namespace ReferenceManager.App.Models
         public int? FkPerfil { get; set; }
         public int? FkAcceso { get; set; }
 
-        public virtual Acceso? FkAccesoNavigation { get; set; }
-        public virtual Perfil? FkPerfilNavigation { get; set; }
+        public virtual Acceso FkAccesoNavigation { get; set; }
+        public virtual Perfil FkPerfilNavigation { get; set; }
     }
 }

@@ -16,28 +16,30 @@ namespace ReferenceManager.App.Models
         {
         }
 
-        public virtual DbSet<Acceso> Accesos { get; set; } = null!;
-        public virtual DbSet<Campo> Campos { get; set; } = null!;
-        public virtual DbSet<Cliente> Clientes { get; set; } = null!;
-        public virtual DbSet<Comercial> Comercials { get; set; } = null!;
-        public virtual DbSet<DetallePerfilAcceso> DetallePerfilAccesos { get; set; } = null!;
-        public virtual DbSet<DetallePlantillaCampo> DetallePlantillaCampos { get; set; } = null!;
-        public virtual DbSet<Perfil> Perfils { get; set; } = null!;
-        public virtual DbSet<PerfilAnalistum> PerfilAnalista { get; set; } = null!;
-        public virtual DbSet<Plantilla> Plantillas { get; set; } = null!;
-        public virtual DbSet<PlantillaCampo> PlantillaCampos { get; set; } = null!;
-        public virtual DbSet<Referencium> Referencia { get; set; } = null!;
-        public virtual DbSet<TipoCampo> TipoCampos { get; set; } = null!;
-        public virtual DbSet<TipoCliente> TipoClientes { get; set; } = null!;
-        public virtual DbSet<TipoComunicacion> TipoComunicacions { get; set; } = null!;
-        public virtual DbSet<TipoReferencium> TipoReferencia { get; set; } = null!;
-        public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
-        public virtual DbSet<Zona> Zonas { get; set; } = null!;
+        public virtual DbSet<Acceso> Accesos { get; set; }
+        public virtual DbSet<Campo> Campos { get; set; }
+        public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Comercial> Comercials { get; set; }
+        public virtual DbSet<DetallePerfilAcceso> DetallePerfilAccesos { get; set; }
+        public virtual DbSet<DetallePlantillaCampo> DetallePlantillaCampos { get; set; }
+        public virtual DbSet<ListaReferencium> ListaReferencia { get; set; }
+        public virtual DbSet<Perfil> Perfils { get; set; }
+        public virtual DbSet<PerfilAnalistum> PerfilAnalista { get; set; }
+        public virtual DbSet<Plantilla> Plantillas { get; set; }
+        public virtual DbSet<PlantillaCampo> PlantillaCampos { get; set; }
+        public virtual DbSet<TipoCampo> TipoCampos { get; set; }
+        public virtual DbSet<TipoCliente> TipoClientes { get; set; }
+        public virtual DbSet<TipoComunicacion> TipoComunicacions { get; set; }
+        public virtual DbSet<TipoReferencium> TipoReferencia { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Zona> Zonas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=DBReferencias;Trusted_Connection=True;");
             }
         }
 
@@ -71,7 +73,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkTipoCampoNavigation)
                     .WithMany(p => p.Campos)
                     .HasForeignKey(d => d.FkTipoCampo)
-                    .HasConstraintName("FK__Campo__Fk_TipoCa__5441852A");
+                    .HasConstraintName("FK__Campo__Fk_TipoCa__5629CD9C");
             });
 
             modelBuilder.Entity<Cliente>(entity =>
@@ -80,27 +82,74 @@ namespace ReferenceManager.App.Models
 
                 entity.Property(e => e.Activio).HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.ClaseCiente)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DireccionNegocio)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FkCliente).HasColumnName("Fk_Cliente");
+
                 entity.Property(e => e.FkComercial).HasColumnName("Fk_Comercial");
 
                 entity.Property(e => e.FkTipoCliente).HasColumnName("Fk_TipoCliente");
 
-                entity.Property(e => e.Nombre)
+                entity.Property(e => e.NombreNegocio)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrimerApellido)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrimerNombre)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SegundoApellido)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SegundoNombre)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoIdentificacion)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Telefono)
-                    .HasMaxLength(30)
+                entity.Property(e => e.TipoLocal)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
+
+                entity.Property(e => e.TipoNegocio)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoVivienda)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.FkClienteNavigation)
+                    .WithMany(p => p.InverseFkClienteNavigation)
+                    .HasForeignKey(d => d.FkCliente)
+                    .HasConstraintName("FK__Cliente__Fk_Clie__14270015");
 
                 entity.HasOne(d => d.FkComercialNavigation)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.FkComercial)
-                    .HasConstraintName("FK__Cliente__Fk_Come__5535A963");
+                    .HasConstraintName("FK__Cliente__Fk_Come__151B244E");
 
                 entity.HasOne(d => d.FkTipoClienteNavigation)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.FkTipoCliente)
-                    .HasConstraintName("FK__Cliente__Fk_Tipo__5629CD9C");
+                    .HasConstraintName("FK__Cliente__Fk_Tipo__5812160E");
             });
 
             modelBuilder.Entity<Comercial>(entity =>
@@ -122,7 +171,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkZonaNavigation)
                     .WithMany(p => p.Comercials)
                     .HasForeignKey(d => d.FkZona)
-                    .HasConstraintName("FK__Comercial__Fk_Zo__571DF1D5");
+                    .HasConstraintName("FK__Comercial__Fk_Zo__59063A47");
             });
 
             modelBuilder.Entity<DetallePerfilAcceso>(entity =>
@@ -138,12 +187,12 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkAccesoNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkAcceso)
-                    .HasConstraintName("FK__DetallePe__FK_Ac__5812160E");
+                    .HasConstraintName("FK__DetallePe__FK_Ac__59FA5E80");
 
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__DetallePe__Fk_Pe__59063A47");
+                    .HasConstraintName("FK__DetallePe__Fk_Pe__5AEE82B9");
             });
 
             modelBuilder.Entity<DetallePlantillaCampo>(entity =>
@@ -169,17 +218,51 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPlantillaCamposNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkPlantillaCampos)
-                    .HasConstraintName("FK__DetallePl__Fk_Pl__59FA5E80");
+                    .HasConstraintName("FK__DetallePl__Fk_Pl__5BE2A6F2");
 
                 entity.HasOne(d => d.FkTipoClienteNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkTipoCliente)
-                    .HasConstraintName("FK__DetallePl__Fk_Ti__5AEE82B9");
+                    .HasConstraintName("FK__DetallePl__Fk_Ti__5CD6CB2B");
 
                 entity.HasOne(d => d.FkTipoReferenciaNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkTipoReferencia)
-                    .HasConstraintName("FK__DetallePl__Fk_Ti__5BE2A6F2");
+                    .HasConstraintName("FK__DetallePl__Fk_Ti__5DCAEF64");
+            });
+
+            modelBuilder.Entity<ListaReferencium>(entity =>
+            {
+                entity.Property(e => e.Activio).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.FkCliente).HasColumnName("Fk_Cliente");
+
+                entity.Property(e => e.FkTipoComunicacion).HasColumnName("Fk_TipoComunicacion");
+
+                entity.Property(e => e.FkTipoReferencia).HasColumnName("Fk_TipoReferencia");
+
+                entity.Property(e => e.PersonaContacto)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.FkClienteNavigation)
+                    .WithMany(p => p.ListaReferencia)
+                    .HasForeignKey(d => d.FkCliente)
+                    .HasConstraintName("FK__Referenci__Fk_Cl__619B8048");
+
+                entity.HasOne(d => d.FkTipoComunicacionNavigation)
+                    .WithMany(p => p.ListaReferencia)
+                    .HasForeignKey(d => d.FkTipoComunicacion)
+                    .HasConstraintName("FK__Referenci__Fk_Ti__6383C8BA");
+
+                entity.HasOne(d => d.FkTipoReferenciaNavigation)
+                    .WithMany(p => p.ListaReferencia)
+                    .HasForeignKey(d => d.FkTipoReferencia)
+                    .HasConstraintName("FK__Referenci__Fk_Ti__628FA481");
             });
 
             modelBuilder.Entity<Perfil>(entity =>
@@ -205,12 +288,12 @@ namespace ReferenceManager.App.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FkPerfil).HasColumnName("Fk_Perfil");
+                entity.Property(e => e.FkUsuario).HasColumnName("Fk_Usuario");
 
-                entity.HasOne(d => d.FkPerfilNavigation)
+                entity.HasOne(d => d.FkUsuarioNavigation)
                     .WithMany(p => p.PerfilAnalista)
-                    .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__PerfilAna__Fk_Pe__5CD6CB2B");
+                    .HasForeignKey(d => d.FkUsuario)
+                    .HasConstraintName("FK__PerfilAna__Fk_Us__06CD04F7");
             });
 
             modelBuilder.Entity<Plantilla>(entity =>
@@ -241,46 +324,12 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkCampoNavigation)
                     .WithMany(p => p.PlantillaCampos)
                     .HasForeignKey(d => d.FkCampo)
-                    .HasConstraintName("FK__Plantilla__Fk_Ca__5DCAEF64");
+                    .HasConstraintName("FK__Plantilla__Fk_Ca__5FB337D6");
 
                 entity.HasOne(d => d.FkPlantillaNavigation)
                     .WithMany(p => p.PlantillaCampos)
                     .HasForeignKey(d => d.FkPlantilla)
-                    .HasConstraintName("FK__Plantilla__Fk_Pl__5EBF139D");
-            });
-
-            modelBuilder.Entity<Referencium>(entity =>
-            {
-                entity.Property(e => e.Activio).HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.FkCliente).HasColumnName("Fk_Cliente");
-
-                entity.Property(e => e.FkTipoComunicacion).HasColumnName("Fk_TipoComunicacion");
-
-                entity.Property(e => e.FkTipoReferencia).HasColumnName("Fk_TipoReferencia");
-
-                entity.Property(e => e.Nombre)
-                    .HasMaxLength(40)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Telefono)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.FkClienteNavigation)
-                    .WithMany(p => p.Referencia)
-                    .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__Referenci__Fk_Cl__5FB337D6");
-
-                entity.HasOne(d => d.FkTipoComunicacionNavigation)
-                    .WithMany(p => p.Referencia)
-                    .HasForeignKey(d => d.FkTipoComunicacion)
-                    .HasConstraintName("FK__Referenci__Fk_Ti__619B8048");
-
-                entity.HasOne(d => d.FkTipoReferenciaNavigation)
-                    .WithMany(p => p.Referencia)
-                    .HasForeignKey(d => d.FkTipoReferencia)
-                    .HasConstraintName("FK__Referenci__Fk_Ti__60A75C0F");
+                    .HasConstraintName("FK__Plantilla__Fk_Pl__60A75C0F");
             });
 
             modelBuilder.Entity<TipoCampo>(entity =>
@@ -294,6 +343,7 @@ namespace ReferenceManager.App.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
@@ -332,7 +382,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPerfilAnalistaNavigation)
                     .WithMany(p => p.TipoComunicacions)
                     .HasForeignKey(d => d.FkPerfilAnalista)
-                    .HasConstraintName("FK__TipoComun__Fk_Pe__628FA481");
+                    .HasConstraintName("FK__TipoComun__Fk_Pe__6477ECF3");
             });
 
             modelBuilder.Entity<TipoReferencium>(entity =>
@@ -352,15 +402,17 @@ namespace ReferenceManager.App.Models
             {
                 entity.ToTable("Usuario");
 
+                entity.HasIndex(e => e.Correo, "UQ__Usuario__60695A19D2870359")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Identificacion, "UQ__Usuario__D6F931E500064AD3")
+                    .IsUnique();
+
                 entity.Property(e => e.Activio)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.CambioContrasena).HasColumnType("datetime");
-
-                entity.Property(e => e.Contrasena).HasMaxLength(1);
-
-                entity.Property(e => e.ContrasenaKey).HasMaxLength(1);
 
                 entity.Property(e => e.Correo)
                     .HasMaxLength(50)
@@ -374,13 +426,14 @@ namespace ReferenceManager.App.Models
                 entity.Property(e => e.FkPerfil).HasColumnName("Fk_Perfil");
 
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasMaxLength(80)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__Usuario__Fk_Perf__6383C8BA");
+                    .HasConstraintName("FK__Usuario__Fk_Perf__656C112C");
             });
 
             modelBuilder.Entity<Zona>(entity =>

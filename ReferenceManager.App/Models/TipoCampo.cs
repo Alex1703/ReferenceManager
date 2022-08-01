@@ -12,8 +12,8 @@ namespace ReferenceManager.App.Models
 
         public int Id { get; set; }
         public bool? Activio { get; set; }
-        public string Nombre { get; set; } = null!;
-        public string? Descripcon { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcon { get; set; }
 
         public virtual ICollection<Campo> Campos { get; set; }
     }

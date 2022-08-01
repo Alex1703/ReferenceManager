@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ReferenceManager.App.Core.Filters;
 using ReferenceManager.App.Models;
+using System.Globalization;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +27,41 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("es-CO"),
+        new CultureInfo("en-US"),
+        new CultureInfo("fa-IR"),
+        new CultureInfo("de-DE")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(culture: "es-CO", uiCulture: "es-CO");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+
+    var defaultCookieRequestProvider =
+        options.RequestCultureProviders.FirstOrDefault(rcp =>
+            rcp.GetType() == typeof(CookieRequestCultureProvider));
+    if (defaultCookieRequestProvider != null)
+        options.RequestCultureProviders.Remove(defaultCookieRequestProvider);
+
+    options.RequestCultureProviders.Insert(0,
+        new CookieRequestCultureProvider()
+        {
+            CookieName = ".AspNetCore.Culture",
+            Options = options
+        });
+});
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddMvc()
+    .AddViewLocalization(
+                LanguageViewLocationExpanderFormat.Suffix) 
+            .AddDataAnnotationsLocalization();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,6 +79,7 @@ app.UseRouting();
 
 app.UseCookiePolicy();
 app.UseSession();
+
 
 
 app.Use(async (context, next) =>
