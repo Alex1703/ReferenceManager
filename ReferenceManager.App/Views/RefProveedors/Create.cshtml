@@ -1,0 +1,98 @@
+﻿@model ReferenceManager.App.Models.RefProveedor
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>RefProveedor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ConfirmarNombre" class="control-label"></label>
+                <input asp-for="ConfirmarNombre" class="form-control" />
+                <span asp-validation-for="ConfirmarNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cargo" class="control-label"></label>
+                <input asp-for="Cargo" class="form-control" />
+                <span asp-validation-for="Cargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DireccionProveedor" class="control-label"></label>
+                <input asp-for="DireccionProveedor" class="form-control" />
+                <span asp-validation-for="DireccionProveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelefonoProveedor" class="control-label"></label>
+                <input asp-for="TelefonoProveedor" class="form-control" />
+                <span asp-validation-for="TelefonoProveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoVenta" class="control-label"></label>
+                <input asp-for="TiempoVenta" class="form-control" />
+                <span asp-validation-for="TiempoVenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductoVenta" class="control-label"></label>
+                <input asp-for="ProductoVenta" class="form-control" />
+                <span asp-validation-for="ProductoVenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FrecuenciaCompra" class="control-label"></label>
+                <input asp-for="FrecuenciaCompra" class="form-control" />
+                <span asp-validation-for="FrecuenciaCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PromedioCompra" class="control-label"></label>
+                <input asp-for="PromedioCompra" class="form-control" />
+                <span asp-validation-for="PromedioCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorUltimaCompra" class="control-label"></label>
+                <input asp-for="ValorUltimaCompra" class="form-control" />
+                <span asp-validation-for="ValorUltimaCompra" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContadoCredito" class="control-label"></label>
+                <input asp-for="ContadoCredito" class="form-control" />
+                <span asp-validation-for="ContadoCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlazoCredito" class="control-label"></label>
+                <input asp-for="PlazoCredito" class="form-control" />
+                <span asp-validation-for="PlazoCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CupoCredito" class="control-label"></label>
+                <input asp-for="CupoCredito" class="form-control" />
+                <span asp-validation-for="CupoCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PagoCredito" class="control-label"></label>
+                <input asp-for="PagoCredito" class="form-control" />
+                <span asp-validation-for="PagoCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Concepto" class="control-label"></label>
+                <input asp-for="Concepto" class="form-control" />
+                <span asp-validation-for="Concepto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

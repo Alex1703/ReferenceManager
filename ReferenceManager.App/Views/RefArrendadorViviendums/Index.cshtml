@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ReferenceManager.App.Models.RefArrendadorViviendum>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QueArrienda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuienVive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreConyuge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actividad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoArriendo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionVivienda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanonArriendo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncluyeServicios)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PuntualResponsable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concepto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QueArrienda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuienVive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreConyuge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actividad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoArriendo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionVivienda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanonArriendo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncluyeServicios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PuntualResponsable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concepto)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

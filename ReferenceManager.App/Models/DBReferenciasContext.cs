@@ -27,6 +27,10 @@ namespace ReferenceManager.App.Models
         public virtual DbSet<PerfilAnalistum> PerfilAnalista { get; set; }
         public virtual DbSet<Plantilla> Plantillas { get; set; }
         public virtual DbSet<PlantillaCampo> PlantillaCampos { get; set; }
+        public virtual DbSet<RefArrendadorLocal> RefArrendadorLocals { get; set; }
+        public virtual DbSet<RefArrendadorViviendum> RefArrendadorVivienda { get; set; }
+        public virtual DbSet<RefFamiliar> RefFamiliars { get; set; }
+        public virtual DbSet<RefProveedor> RefProveedors { get; set; }
         public virtual DbSet<TipoCampo> TipoCampos { get; set; }
         public virtual DbSet<TipoCliente> TipoClientes { get; set; }
         public virtual DbSet<TipoComunicacion> TipoComunicacions { get; set; }
@@ -39,7 +43,7 @@ namespace ReferenceManager.App.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=DBReferencias;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-EVSN5I0\\SQLEXPRESS;Database=DBReferencias;Trusted_Connection=True;");
             }
         }
 
@@ -139,17 +143,17 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkClienteNavigation)
                     .WithMany(p => p.InverseFkClienteNavigation)
                     .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__Cliente__Fk_Clie__14270015");
+                    .HasConstraintName("FK__Cliente__Fk_Clie__571DF1D5");
 
                 entity.HasOne(d => d.FkComercialNavigation)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.FkComercial)
-                    .HasConstraintName("FK__Cliente__Fk_Come__151B244E");
+                    .HasConstraintName("FK__Cliente__Fk_Come__5812160E");
 
                 entity.HasOne(d => d.FkTipoClienteNavigation)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.FkTipoCliente)
-                    .HasConstraintName("FK__Cliente__Fk_Tipo__5812160E");
+                    .HasConstraintName("FK__Cliente__Fk_Tipo__59063A47");
             });
 
             modelBuilder.Entity<Comercial>(entity =>
@@ -171,7 +175,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkZonaNavigation)
                     .WithMany(p => p.Comercials)
                     .HasForeignKey(d => d.FkZona)
-                    .HasConstraintName("FK__Comercial__Fk_Zo__59063A47");
+                    .HasConstraintName("FK__Comercial__Fk_Zo__59FA5E80");
             });
 
             modelBuilder.Entity<DetallePerfilAcceso>(entity =>
@@ -187,12 +191,12 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkAccesoNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkAcceso)
-                    .HasConstraintName("FK__DetallePe__FK_Ac__59FA5E80");
+                    .HasConstraintName("FK__DetallePe__FK_Ac__5AEE82B9");
 
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__DetallePe__Fk_Pe__5AEE82B9");
+                    .HasConstraintName("FK__DetallePe__Fk_Pe__5BE2A6F2");
             });
 
             modelBuilder.Entity<DetallePlantillaCampo>(entity =>
@@ -218,17 +222,17 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPlantillaCamposNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkPlantillaCampos)
-                    .HasConstraintName("FK__DetallePl__Fk_Pl__5BE2A6F2");
+                    .HasConstraintName("FK__DetallePl__Fk_Pl__5CD6CB2B");
 
                 entity.HasOne(d => d.FkTipoClienteNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkTipoCliente)
-                    .HasConstraintName("FK__DetallePl__Fk_Ti__5CD6CB2B");
+                    .HasConstraintName("FK__DetallePl__Fk_Ti__5DCAEF64");
 
                 entity.HasOne(d => d.FkTipoReferenciaNavigation)
                     .WithMany(p => p.DetallePlantillaCampos)
                     .HasForeignKey(d => d.FkTipoReferencia)
-                    .HasConstraintName("FK__DetallePl__Fk_Ti__5DCAEF64");
+                    .HasConstraintName("FK__DetallePl__Fk_Ti__5EBF139D");
             });
 
             modelBuilder.Entity<ListaReferencium>(entity =>
@@ -252,17 +256,17 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkClienteNavigation)
                     .WithMany(p => p.ListaReferencia)
                     .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__Referenci__Fk_Cl__619B8048");
+                    .HasConstraintName("FK__ListaRefe__Fk_Cl__5FB337D6");
 
                 entity.HasOne(d => d.FkTipoComunicacionNavigation)
                     .WithMany(p => p.ListaReferencia)
                     .HasForeignKey(d => d.FkTipoComunicacion)
-                    .HasConstraintName("FK__Referenci__Fk_Ti__6383C8BA");
+                    .HasConstraintName("FK__ListaRefe__Fk_Ti__619B8048");
 
                 entity.HasOne(d => d.FkTipoReferenciaNavigation)
                     .WithMany(p => p.ListaReferencia)
                     .HasForeignKey(d => d.FkTipoReferencia)
-                    .HasConstraintName("FK__Referenci__Fk_Ti__628FA481");
+                    .HasConstraintName("FK__ListaRefe__Fk_Ti__60A75C0F");
             });
 
             modelBuilder.Entity<Perfil>(entity =>
@@ -293,7 +297,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkUsuarioNavigation)
                     .WithMany(p => p.PerfilAnalista)
                     .HasForeignKey(d => d.FkUsuario)
-                    .HasConstraintName("FK__PerfilAna__Fk_Us__06CD04F7");
+                    .HasConstraintName("FK__PerfilAna__Fk_Us__628FA481");
             });
 
             modelBuilder.Entity<Plantilla>(entity =>
@@ -324,12 +328,266 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkCampoNavigation)
                     .WithMany(p => p.PlantillaCampos)
                     .HasForeignKey(d => d.FkCampo)
-                    .HasConstraintName("FK__Plantilla__Fk_Ca__5FB337D6");
+                    .HasConstraintName("FK__Plantilla__Fk_Ca__6383C8BA");
 
                 entity.HasOne(d => d.FkPlantillaNavigation)
                     .WithMany(p => p.PlantillaCampos)
                     .HasForeignKey(d => d.FkPlantilla)
-                    .HasConstraintName("FK__Plantilla__Fk_Pl__60A75C0F");
+                    .HasConstraintName("FK__Plantilla__Fk_Pl__6477ECF3");
+            });
+
+            modelBuilder.Entity<RefArrendadorLocal>(entity =>
+            {
+                entity.ToTable("RefArrendadorLocal");
+
+                entity.Property(e => e.CanonArriendo).HasColumnType("money");
+
+                entity.Property(e => e.CantidadEmpleados)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Concepto)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DireccionLocal)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IncluyeServicios)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreConyuge)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PuntualResponsable)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.QueArrienda)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.QuienVive)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiempoArriendo)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TipoNegocio)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RefArrendadorViviendum>(entity =>
+            {
+                entity.Property(e => e.Actividad)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CanonArriendo).HasColumnType("money");
+
+                entity.Property(e => e.Concepto)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DireccionVivienda)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IncluyeServicios)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreConyuge)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PuntualResponsable)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.QueArrienda)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.QuienVive)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiempoArriendo)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RefFamiliar>(entity =>
+            {
+                entity.ToTable("RefFamiliar");
+
+                entity.Property(e => e.Actividad)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BarrioNegocio)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CantidadEmpleados)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CantidadHijos)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Concepto)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConfirmacionNombre)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DireccionTelefono)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreConyuge)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Parentezco)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.QuienVive)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiempoNegocio)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RefProveedor>(entity =>
+            {
+                entity.ToTable("RefProveedor");
+
+                entity.Property(e => e.Cargo)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Concepto)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ConfirmarNombre)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ContadoCredito)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CupoCredito)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DireccionProveedor)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FrecuenciaCompra)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PagoCredito)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlazoCredito)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProductoVenta)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PromedioCompra)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TelefonoProveedor)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TiempoVenta)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ValorUltimaCompra)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TipoCampo>(entity =>
@@ -382,7 +640,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPerfilAnalistaNavigation)
                     .WithMany(p => p.TipoComunicacions)
                     .HasForeignKey(d => d.FkPerfilAnalista)
-                    .HasConstraintName("FK__TipoComun__Fk_Pe__6477ECF3");
+                    .HasConstraintName("FK__TipoComun__Fk_Pe__656C112C");
             });
 
             modelBuilder.Entity<TipoReferencium>(entity =>
@@ -402,10 +660,10 @@ namespace ReferenceManager.App.Models
             {
                 entity.ToTable("Usuario");
 
-                entity.HasIndex(e => e.Correo, "UQ__Usuario__60695A19D2870359")
+                entity.HasIndex(e => e.Correo, "UQ__Usuario__60695A192430E047")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Identificacion, "UQ__Usuario__D6F931E500064AD3")
+                entity.HasIndex(e => e.Identificacion, "UQ__Usuario__D6F931E5912536ED")
                     .IsUnique();
 
                 entity.Property(e => e.Activio)
@@ -433,7 +691,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__Usuario__Fk_Perf__656C112C");
+                    .HasConstraintName("FK__Usuario__Fk_Perf__66603565");
             });
 
             modelBuilder.Entity<Zona>(entity =>
