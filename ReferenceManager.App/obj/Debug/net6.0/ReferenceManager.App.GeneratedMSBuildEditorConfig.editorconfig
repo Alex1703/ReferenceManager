@@ -8,225 +8,305 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ReferenceManager.App
 build_property.RootNamespace = ReferenceManager.App
-build_property.ProjectDir = C:\Users\Alex\source\repos\ReferenceManager\ReferenceManager\ReferenceManager.App\
+build_property.ProjectDir = C:\Users\alex_\Source\Repos\Alex1703\ReferenceManager\ReferenceManager.App\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Alex\source\repos\ReferenceManager\ReferenceManager\ReferenceManager.App
+build_property.MSBuildProjectDirectory = C:\Users\alex_\Source\Repos\Alex1703\ReferenceManager\ReferenceManager.App
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Accesoes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Accesoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Accesoes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Accesoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Accesoes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Accesoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Accesoes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Accesoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Accesoes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Accesoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Auth/ChangePassword.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Auth/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Auth/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Auth/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Campoes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Campoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcG9lc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Campoes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Campoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcG9lc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Campoes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Campoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcG9lc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Campoes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Campoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcG9lc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Campoes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Campoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FtcG9lc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Clientes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Clientes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Clientes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Clientes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Clientes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Clientes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Clientes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Clientes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Clientes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Clientes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVBlcmZpbEFjY2Vzb2VzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVBlcmZpbEFjY2Vzb2VzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVBlcmZpbEFjY2Vzb2VzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVBlcmZpbEFjY2Vzb2VzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/DetallePerfilAccesoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWxsZVBlcmZpbEFjY2Vzb2VzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Home/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Home/Privacy.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Perfils/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Perfils/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Perfils/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Perfils/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Perfils/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Perfils/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Perfils/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Perfils/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Perfils/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Perfils/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZmlsc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhQ2FtcG9lc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhQ2FtcG9lc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhQ2FtcG9lc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhQ2FtcG9lc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/PlantillaCampoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhQ2FtcG9lc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Plantillas/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Plantillas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Plantillas/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Plantillas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Plantillas/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Plantillas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Plantillas/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Plantillas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Plantillas/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Plantillas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhbnRpbGxhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Shared/Error.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorLocals/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvckxvY2Fsc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorLocals/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvckxvY2Fsc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorLocals/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvckxvY2Fsc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorLocals/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvckxvY2Fsc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorLocals/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvckxvY2Fsc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorViviendums/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvclZpdmllbmR1bXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorViviendums/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvclZpdmllbmR1bXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorViviendums/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvclZpdmllbmR1bXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorViviendums/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvclZpdmllbmR1bXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefArrendadorViviendums/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmQXJyZW5kYWRvclZpdmllbmR1bXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefFamiliars/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmRmFtaWxpYXJzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefFamiliars/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmRmFtaWxpYXJzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefFamiliars/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmRmFtaWxpYXJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefFamiliars/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmRmFtaWxpYXJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefFamiliars/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmRmFtaWxpYXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefProveedors/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmUHJvdmVlZG9yc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefProveedors/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmUHJvdmVlZG9yc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefProveedors/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmUHJvdmVlZG9yc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefProveedors/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmUHJvdmVlZG9yc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/RefProveedors/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmUHJvdmVlZG9yc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0NhbXBvZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0NhbXBvZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0NhbXBvZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0NhbXBvZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/TipoCampoes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb0NhbXBvZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/_ViewImports.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/_ViewStart.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Usuarios/Create.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Usuarios/Delete.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Usuarios/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Usuarios/Details.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Usuarios/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Usuarios/Edit.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Usuarios/Index.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alex/source/repos/ReferenceManager/ReferenceManager/ReferenceManager.App/Views/Shared/_Layout.cshtml]
+[C:/Users/alex_/Source/Repos/Alex1703/ReferenceManager/ReferenceManager.App/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-k5knmyn9dj

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ReferenceManager.App.Models.RefFamiliar>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmacionNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parentezco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoCivil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreConyuge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadHijos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuienVive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actividad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoNegocio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarrioNegocio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadEmpleados)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionTelefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concepto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmacionNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Parentezco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreConyuge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadHijos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuienVive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actividad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoNegocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BarrioNegocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadEmpleados)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionTelefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concepto)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
