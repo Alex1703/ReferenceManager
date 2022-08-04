@@ -6,21 +6,31 @@
     Comercial comercial = null;
     var txtidentificacion = "";
     var isVisible = "none";
-    
+    var OcultarFiltro = "";
+    var idCliente = 0;
     var temp = ViewBag.isTitular != null ? ViewBag.isTitular : "0";
 
-    if (ViewBag.Comercial != null)
+    var ErrorMsm = ViewData["Mensaje"] != null ? ViewData["Mensaje"].ToString().Length : 0;
+    var Mensaje = ViewData["Mensaje"] != null ? ViewData["Mensaje"].ToString() : "";
+
+    if (ViewData["Comercial"] != null)
     {
-        comercial = (Comercial)ViewBag.Comercial;
+        comercial = (Comercial)ViewData["Comercial"];
         txtidentificacion = comercial.Cedula;
         isVisible = "";
+        OcultarFiltro = "none";
+    }
+    if (temp == "2")
+    {
+        idCliente = Convert.ToInt32(ViewData["IdCliente"]);
     }
 }
 
 <h1>Cargue Referencia</h1>
 
-<hr />
-<form asp-action="GetComercialById">
+
+<form asp-action="GetComercialById" id="GetComercialById" name="GetComercialById" style="display:@OcultarFiltro">
+    <hr />
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -109,8 +119,11 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="TipoIdentificacion" class="control-label"></label>
-                            <input asp-for="TipoIdentificacion" class="form-control" />
-                            <span asp-validation-for="TipoIdentificacion" class="text-danger"></span>
+                            <select class="form-select" id="TipoIdentificacion" name="TipoIdentificacion">
+                                <option value="Cedula de Ciudadania">Cedula de Ciudadania</option>
+                                <option value="Cedula de Extranjeria">Cedula de Extranjeria</option>
+                                <option value="Numero de Identificacion Tributaria (Nit)">Numero de Identificacion Tributaria (Nit)</option>
+                            </select>
                         </div>
                     </div>
 
@@ -178,7 +191,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="TipoLocal" class="control-label"></label>
-                            <select id="Cliente_TipoLocal" name="Cliente_TipoLocal" class="form-select">
+                            <select id="TipoLocal" name="TipoLocal" class="form-select">
                                 <option value="Arrendado">Arrendado</option>
                                 <option value="Propio">Propio</option>
                                 <option value="Familiar">Familiar</option>
@@ -189,7 +202,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="TipoVivienda" class="control-label"></label>
-                            <select class="form-select" id="Cliente_TipoVivienda" name="Cliente_TipoVivienda">
+                            <select class="form-select" id="TipoVivienda" name="TipoVivienda">
                                 <option value="Arrendada">Arrendada</option>
                                 <option value="Propio">Propio</option>
                                 <option value="Familiar">Familiar</option>
@@ -203,7 +216,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="EstadoCivil" class="control-label"></label>
-                            <select class="form-select" id="Cliente_EstadoCivil" name="Cliente_EstadoCivil">
+                            <select class="form-select" id="EstadoCivil" name="EstadoCivil">
                                 <option value="Soltero">Soltero</option>
                                 <option value="Casado">Casado</option>
                                 <option value="Separado">Separado</option>
@@ -217,7 +230,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label asp-for="ClaseCiente" class="control-label"></label>
-                            <select class="form-select" id="Cliente_ClaseCiente" name="Cliente_ClaseCiente">
+                            <select class="form-select" id="ClaseCiente" name="ClaseCiente">
                                 <option value="Nuevo">Nuevo</option>
                                 <option value="Retanqueo">Retanqueo</option>
                                 <option value="Renovacion">Renovacion</option>
@@ -234,9 +247,26 @@
                             <select asp-for="FkTipoCliente" class="form-control" asp-items="ViewBag.FkTipoCliente"></select>
                         </div>
                     </div>
-                    <div class="col"></div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="FkComercial" class="control-label"></label>
+                            <input asp-for="FkComercial" class="form-control" value="@comercial.Id">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label asp-for="FkCliente" class="control-label"></label>
+                            <input asp-for="FkCliente" class="form-control" value="@idCliente">
+                        </div>
+                    </div>
                 </div>
-
+                <div class="row">
+                    <div class="form-group">
+                        <label asp-for="TipoNegocio" class="control-label"></label>
+                        <textarea asp-for="TipoNegocio" class="form-control" row="3"></textarea>
+                    </div>
+                </div>
+                <br />
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
@@ -248,10 +278,14 @@
     <hr />
     <br />
 
+
 }
 <div>
 </div>
 
+
+<input type="text" class="form-control" style="display:none" id="txtMensaje" value="@Mensaje">
+<input type="text" class="form-control" style="display:none" id="txtErrorMsm" value="@ErrorMsm">
 
 @section Scripts {
     @{
@@ -263,8 +297,26 @@
             $("#isTitular option[value='@temp']").prop("selected", "selected");
             $("#FkTipoCliente option[value='@temp']").prop("selected", "selected");
 
+            if (parseInt($("#txtErrorMsm").val()) > 0) {
+                Swal.fire({
+                    title: 'Alerta!',
+                    text: $("#txtMensaje").val(),
+                    icon: 'warning',
+                    confirmButtonText: 'ok'
+                }).then((result) => {
+                    window.location.href = window.location.origin + "/Clientes/Create"
+                });
+            }
+
         });
 
+        $("#idComercial").change(function() {
+            window.setTimeout(function() {
+                debugger;
+                if ($("#isTitular").val() == "2")
+                    $("#FkCliente").val($("#idComercial").val())
+            }, 2000);
+        });
 
         $("#isTitular").change(function() {
             debugger;
@@ -283,10 +335,18 @@
             $("#lblIdentificacion").text(Identificacion);
         });
 
+        $("#GetComercialById").submit(function() {
 
-
-
-
+            if ($("#idComercial").val() == "") {
+                var textLabel = $("#lblIdentificacion").text().replace(":", "");
+                Swal.fire(
+                    'Error!',
+                    'Debes llenar el campo: ' + textLabel,
+                    'error'
+                )
+                return false;
+            }
+        });
 
     </script>
     }

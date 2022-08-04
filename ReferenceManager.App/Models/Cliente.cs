@@ -18,13 +18,13 @@ namespace ReferenceManager.App.Models
         [Required]
         [Display(Name ="Primer Nombre")]
         public string PrimerNombre { get; set; }
-        [Required]
+        
         [Display(Name = "Segundo Nombre")]
         public string SegundoNombre { get; set; }
         [Required]
         [Display(Name = "Primer Apellido")]
         public string PrimerApellido { get; set; }
-        [Required]
+        
         [Display(Name = "Segundo Apellido")]
         public string SegundoApellido { get; set; }
         [Required]

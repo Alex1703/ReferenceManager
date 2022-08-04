@@ -1,0 +1,50 @@
+﻿@model ReferenceManager.App.Models.ListaReferencium
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ListaReferencium</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PersonaContacto" class="control-label"></label>
+                <input asp-for="PersonaContacto" class="form-control" />
+                <span asp-validation-for="PersonaContacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkCliente" class="control-label"></label>
+                <select asp-for="FkCliente" class ="form-control" asp-items="ViewBag.FkCliente"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkTipoReferencia" class="control-label"></label>
+                <select asp-for="FkTipoReferencia" class ="form-control" asp-items="ViewBag.FkTipoReferencia"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FkTipoComunicacion" class="control-label"></label>
+                <select asp-for="FkTipoComunicacion" class ="form-control" asp-items="ViewBag.FkTipoComunicacion"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

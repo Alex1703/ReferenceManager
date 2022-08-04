@@ -12,6 +12,8 @@ namespace ReferenceManager.App.Controllers
     public class ClientesController : Controller
     {
         private readonly DBReferenciasContext _context;
+        private Int64 _identificacion;
+        private string _tipoCliente;
 
         public ClientesController(DBReferenciasContext context)
         {
@@ -60,13 +62,13 @@ namespace ReferenceManager.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (IsTitular((long)cliente.NoIdentificacion))
-                //{
+                if (cliente.FkCliente != null)
+                {
 
-                //}
-                //_context.Add(cliente);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                }
+                _context.Add(cliente);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = cliente.Id });
             }
             ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Nombre", cliente.FkTipoCliente);
             return View();
@@ -173,14 +175,42 @@ namespace ReferenceManager.App.Controllers
         {
             try
             {
+                _identificacion = Convert.ToInt64(idComercial);
+                _tipoCliente = isTitular;
                 Comercial comercial = null;
-                comercial = _context.Comercials.Include(x => x.FkZonaNavigation).FirstOrDefault(a => a.Cedula == idComercial);
-
-                if (comercial != null)
-                    ViewBag.Comercial = comercial;
+                if (isTitular == "1")
+                {
+                    comercial = _context.Comercials.Include(x => x.FkZonaNavigation).FirstOrDefault(a => a.Cedula == idComercial);
+                }
+                else {
+                    comercial = _context.Clientes.
+                        Include(x => x.FkComercialNavigation).
+                        Include(z=>z.FkComercialNavigation.FkZonaNavigation).
+                        Where(x => x.FkCliente == null && x.NoIdentificacion == Convert.ToInt64(idComercial)).
+                        Select(x => new Comercial {
+                            Id = x.FkComercialNavigation.Id, 
+                            Nombre = x.FkComercialNavigation.Nombre,
+                            Cedula = x.FkComercialNavigation.Cedula,
+                            FkZonaNavigation = x.FkComercialNavigation.FkZonaNavigation,
+                            Clientes = x.FkComercialNavigation.Clientes
+                        }).FirstOrDefault();
+                    ViewData["IdCliente"] = comercial.Clientes.Where(x=>x.FkCliente == null).FirstOrDefault().Id;
+                }
+                
+                if (comercial != null) 
+                {
+                    ViewData["identificacion"] = idComercial;
+                    ViewData["isTitular"] = isTitular;
+                    ViewData["Comercial"] = comercial;
+                }
+                else
+                {
+                    ViewData["Mensaje"] = "No se encontrol el usuario";
+                }
+                    
 
                 ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Nombre");
-                ViewBag.isTitular = isTitular;
+                
                 return View("Create");
             }
             catch (Exception)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReferenceManager.App.Models
 {
@@ -17,8 +18,12 @@ namespace ReferenceManager.App.Models
         public byte[] Contrasena { get; set; }
         public byte[] ContrasenaKey { get; set; }
         public string EnLinea { get; set; }
+        [Required]
+        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Email is not valid")]
         public string Correo { get; set; }
         public DateTime? CambioContrasena { get; set; }
+        [Required]
+        [Display(Name = "Perfil")]
         public int? FkPerfil { get; set; }
 
         public virtual Perfil FkPerfilNavigation { get; set; }
