@@ -1,0 +1,84 @@
+﻿@model ReferenceManager.App.Models.RefArrendadorViviendum
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>RefArrendadorViviendum</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="QueArrienda" class="control-label"></label>
+                <input asp-for="QueArrienda" class="form-control" />
+                <span asp-validation-for="QueArrienda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuienVive" class="control-label"></label>
+                <input asp-for="QuienVive" class="form-control" />
+                <span asp-validation-for="QuienVive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoCivil" class="control-label"></label>
+                <input asp-for="EstadoCivil" class="form-control" />
+                <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreConyuge" class="control-label"></label>
+                <input asp-for="NombreConyuge" class="form-control" />
+                <span asp-validation-for="NombreConyuge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Actividad" class="control-label"></label>
+                <input asp-for="Actividad" class="form-control" />
+                <span asp-validation-for="Actividad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoArriendo" class="control-label"></label>
+                <input asp-for="TiempoArriendo" class="form-control" />
+                <span asp-validation-for="TiempoArriendo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DireccionVivienda" class="control-label"></label>
+                <input asp-for="DireccionVivienda" class="form-control" />
+                <span asp-validation-for="DireccionVivienda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CanonArriendo" class="control-label"></label>
+                <input asp-for="CanonArriendo" class="form-control" />
+                <span asp-validation-for="CanonArriendo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IncluyeServicios" class="control-label"></label>
+                <input asp-for="IncluyeServicios" class="form-control" />
+                <span asp-validation-for="IncluyeServicios" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuntualResponsable" class="control-label"></label>
+                <input asp-for="PuntualResponsable" class="form-control" />
+                <span asp-validation-for="PuntualResponsable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Concepto" class="control-label"></label>
+                <input asp-for="Concepto" class="form-control" />
+                <span asp-validation-for="Concepto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
