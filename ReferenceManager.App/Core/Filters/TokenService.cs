@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using ReferenceManager.App.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,7 +11,7 @@ namespace ReferenceManager.App.Core.Filters
         private readonly IConfiguration _configuration;
         public TokenService(IConfiguration configuration)
         {
-            _configuration = configuration; 
+            _configuration = configuration;
         }
         public string CreatedToken(Usuario usuario)
         {
@@ -33,7 +31,7 @@ namespace ReferenceManager.App.Core.Filters
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
-       
+
         public int? ValidateToken(string token)
         {
             if (token == null)

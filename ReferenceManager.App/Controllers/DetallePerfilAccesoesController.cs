@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
@@ -160,14 +156,14 @@ namespace ReferenceManager.App.Controllers
             {
                 _context.DetallePerfilAccesos.Remove(detallePerfilAcceso);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DetallePerfilAccesoExists(int id)
         {
-          return (_context.DetallePerfilAccesos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.DetallePerfilAccesos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

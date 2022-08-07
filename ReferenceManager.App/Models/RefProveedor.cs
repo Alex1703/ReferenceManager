@@ -5,6 +5,11 @@ namespace ReferenceManager.App.Models
 {
     public partial class RefProveedor
     {
+        public RefProveedor()
+        {
+            DetalleComunicacions = new HashSet<DetalleComunicacion>();
+        }
+
         public int Id { get; set; }
         public string ConfirmarNombre { get; set; }
         public string Cargo { get; set; }
@@ -20,5 +25,7 @@ namespace ReferenceManager.App.Models
         public string CupoCredito { get; set; }
         public string PagoCredito { get; set; }
         public string Concepto { get; set; }
+
+        public virtual ICollection<DetalleComunicacion> DetalleComunicacions { get; set; }
     }
 }

@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using ReferenceManager.App.Core.Filters;
 using ReferenceManager.App.Models;
 using System.Globalization;
@@ -59,7 +56,7 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 
 builder.Services.AddMvc()
     .AddViewLocalization(
-                LanguageViewLocationExpanderFormat.Suffix) 
+                LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization();
 
 var app = builder.Build();

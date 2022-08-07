@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ReferenceManager.App.Models
+﻿namespace ReferenceManager.App.Models
 {
     public partial class Referencium
     {

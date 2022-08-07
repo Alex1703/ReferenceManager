@@ -24,7 +24,7 @@ namespace ReferenceManager.App.Controllers
                 var result = _tokenService.ValidateToken(HttpContext.Session.GetString("JWToken"));
                 if (result == null)
                 {
-                    return RedirectToAction("Index","Auth");
+                    return RedirectToAction("Index", "Auth");
                 }
             }
             else

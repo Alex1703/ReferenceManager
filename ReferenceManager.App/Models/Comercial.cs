@@ -7,7 +7,7 @@ namespace ReferenceManager.App.Models
     {
         public Comercial()
         {
-            Clientes = new HashSet<Cliente>();
+            Casos = new HashSet<Caso>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace ReferenceManager.App.Models
         public int? FkZona { get; set; }
 
         public virtual Zona FkZonaNavigation { get; set; }
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual ICollection<Caso> Casos { get; set; }
     }
 }

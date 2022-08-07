@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
 
@@ -21,7 +16,7 @@ namespace ReferenceManager.App.Controllers
         // GET: RefProveedors
         public async Task<IActionResult> Index()
         {
-              return View(await _context.RefProveedors.ToListAsync());
+            return View(await _context.RefProveedors.ToListAsync());
         }
 
         // GET: RefProveedors/Details/5
@@ -147,14 +142,14 @@ namespace ReferenceManager.App.Controllers
             {
                 _context.RefProveedors.Remove(refProveedor);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool RefProveedorExists(int id)
         {
-          return _context.RefProveedors.Any(e => e.Id == id);
+            return _context.RefProveedors.Any(e => e.Id == id);
         }
     }
 }

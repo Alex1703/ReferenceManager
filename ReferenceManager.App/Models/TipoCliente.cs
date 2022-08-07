@@ -8,7 +8,6 @@ namespace ReferenceManager.App.Models
         public TipoCliente()
         {
             Clientes = new HashSet<Cliente>();
-            DetallePlantillaCampos = new HashSet<DetallePlantillaCampo>();
         }
 
         public int Id { get; set; }
@@ -17,6 +16,5 @@ namespace ReferenceManager.App.Models
         public string Descripcion { get; set; }
 
         public virtual ICollection<Cliente> Clientes { get; set; }
-        public virtual ICollection<DetallePlantillaCampo> DetallePlantillaCampos { get; set; }
     }
 }

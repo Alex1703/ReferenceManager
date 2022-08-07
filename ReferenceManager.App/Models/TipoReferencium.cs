@@ -7,7 +7,6 @@ namespace ReferenceManager.App.Models
     {
         public TipoReferencium()
         {
-            DetallePlantillaCampos = new HashSet<DetallePlantillaCampo>();
             ListaReferencia = new HashSet<ListaReferencium>();
         }
 
@@ -15,8 +14,9 @@ namespace ReferenceManager.App.Models
         public bool? Activio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public string Url { get; set; }
+        public string Tabla { get; set; }
 
-        public virtual ICollection<DetallePlantillaCampo> DetallePlantillaCampos { get; set; }
         public virtual ICollection<ListaReferencium> ListaReferencia { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace ReferenceManager.App.Models
     {
         public int Id { get; set; }
         public string Estado { get; set; }
-        public int? FkComercial { get; set; }
         public int? FkCliente { get; set; }
+        public int? FkComercial { get; set; }
 
         public virtual Cliente FkClienteNavigation { get; set; }
         public virtual Comercial FkComercialNavigation { get; set; }

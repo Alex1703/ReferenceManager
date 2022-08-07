@@ -7,7 +7,8 @@ namespace ReferenceManager.App.Models
     {
         public PerfilAnalistum()
         {
-            TipoComunicacions = new HashSet<TipoComunicacion>();
+            DetalleComunicacions = new HashSet<DetalleComunicacion>();
+            ListaReferencia = new HashSet<ListaReferencium>();
         }
 
         public int Id { get; set; }
@@ -16,6 +17,7 @@ namespace ReferenceManager.App.Models
         public int? FkUsuario { get; set; }
 
         public virtual Usuario FkUsuarioNavigation { get; set; }
-        public virtual ICollection<TipoComunicacion> TipoComunicacions { get; set; }
+        public virtual ICollection<DetalleComunicacion> DetalleComunicacions { get; set; }
+        public virtual ICollection<ListaReferencium> ListaReferencia { get; set; }
     }
 }

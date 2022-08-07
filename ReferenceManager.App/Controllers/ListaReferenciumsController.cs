@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,18 +12,17 @@ namespace ReferenceManager.App.Controllers
     public class ListaReferenciumsController : Controller
     {
         private readonly DBReferenciasContext _context;
-        private int _idCliente = 0;
-
+        private int _idCliente;
         public ListaReferenciumsController(DBReferenciasContext context)
         {
             _context = context;
         }
 
         // GET: ListaReferenciums
-        public async Task<IActionResult> Index(int? idCliente)
+        public async Task<IActionResult> Index()
         {
-            _idCliente = (int)idCliente;
-            var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkTipoComunicacionNavigation).Include(l => l.FkTipoReferenciaNavigation);
+
+            var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkPerfilAnalistaNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
             return View(await dBReferenciasContext.ToListAsync());
         }
 
@@ -38,7 +36,7 @@ namespace ReferenceManager.App.Controllers
 
             var listaReferencium = await _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkTipoComunicacionNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (listaReferencium == null)
@@ -50,12 +48,23 @@ namespace ReferenceManager.App.Controllers
         }
 
         // GET: ListaReferenciums/Create
-        public IActionResult Create(int? idCliente)
+        public IActionResult Create(string idCliente)
         {
-            _idCliente = (int)idCliente;
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "ClaseCiente");
-            ViewData["FkTipoComunicacion"] = new SelectList(_context.TipoComunicacions, "Id", "Id");
-            ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id");
+            TempData["idCliente"] = Convert.ToInt32(idCliente);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes
+                .Where(x => x.Id == Convert.ToInt32(idCliente))
+                .Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
+            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id");
+            ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
+            var referencias = _context.ListaReferencia
+                .Include(l => l.FkClienteNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkTipoReferenciaNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation.FkUsuarioNavigation)
+                .Where(x => x.FkCliente == (int)TempData["idCliente"]).ToList();
+
+            ViewData["ListaReferencia"] = referencias.Count > 0 ? referencias : null;
+
             return View();
         }
 
@@ -64,18 +73,23 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,FkTipoComunicacion")] ListaReferencium listaReferencium)
+        public async Task<IActionResult> Create([Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,Estado,FkPerfilAnalista")] ListaReferencium listaReferencium)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(listaReferencium);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "ClaseCiente", listaReferencium.FkCliente);
-            ViewData["FkTipoComunicacion"] = new SelectList(_context.TipoComunicacions, "Id", "Id", listaReferencium.FkTipoComunicacion);
-            ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
-            return View(listaReferencium);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes.Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
+            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id");
+            ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
+            ViewData["ListaReferencia"] = _context.ListaReferencia
+                .Include(l => l.FkClienteNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkTipoReferenciaNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation.FkUsuarioNavigation)
+                .Where(x => x.FkCliente == (int)TempData["idCliente"]);
+            return View();
         }
 
         // GET: ListaReferenciums/Edit/5
@@ -91,8 +105,8 @@ namespace ReferenceManager.App.Controllers
             {
                 return NotFound();
             }
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "ClaseCiente", listaReferencium.FkCliente);
-            ViewData["FkTipoComunicacion"] = new SelectList(_context.TipoComunicacions, "Id", "Id", listaReferencium.FkTipoComunicacion);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "Id", listaReferencium.FkCliente);
+            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id", listaReferencium.FkPerfilAnalista);
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
             return View(listaReferencium);
         }
@@ -102,7 +116,7 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,FkTipoComunicacion")] ListaReferencium listaReferencium)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,Estado,FkPerfilAnalista")] ListaReferencium listaReferencium)
         {
             if (id != listaReferencium.Id)
             {
@@ -129,8 +143,8 @@ namespace ReferenceManager.App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "ClaseCiente", listaReferencium.FkCliente);
-            ViewData["FkTipoComunicacion"] = new SelectList(_context.TipoComunicacions, "Id", "Id", listaReferencium.FkTipoComunicacion);
+            ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "Id", listaReferencium.FkCliente);
+            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id", listaReferencium.FkPerfilAnalista);
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
             return View(listaReferencium);
         }
@@ -145,7 +159,7 @@ namespace ReferenceManager.App.Controllers
 
             var listaReferencium = await _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkTipoComunicacionNavigation)
+                .Include(l => l.FkPerfilAnalistaNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (listaReferencium == null)
@@ -170,14 +184,14 @@ namespace ReferenceManager.App.Controllers
             {
                 _context.ListaReferencia.Remove(listaReferencium);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ListaReferenciumExists(int id)
         {
-          return _context.ListaReferencia.Any(e => e.Id == id);
+            return _context.ListaReferencia.Any(e => e.Id == id);
         }
     }
 }

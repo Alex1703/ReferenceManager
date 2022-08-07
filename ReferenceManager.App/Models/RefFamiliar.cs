@@ -5,6 +5,11 @@ namespace ReferenceManager.App.Models
 {
     public partial class RefFamiliar
     {
+        public RefFamiliar()
+        {
+            DetalleComunicacions = new HashSet<DetalleComunicacion>();
+        }
+
         public int Id { get; set; }
         public string ConfirmacionNombre { get; set; }
         public string Parentezco { get; set; }
@@ -18,5 +23,7 @@ namespace ReferenceManager.App.Models
         public string CantidadEmpleados { get; set; }
         public string DireccionTelefono { get; set; }
         public string Concepto { get; set; }
+
+        public virtual ICollection<DetalleComunicacion> DetalleComunicacions { get; set; }
     }
 }

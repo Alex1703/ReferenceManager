@@ -22,10 +22,13 @@
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FkClienteNavigation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FkTipoComunicacionNavigation)
+                @Html.DisplayNameFor(model => model.FkPerfilAnalistaNavigation)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FkTipoReferenciaNavigation)
@@ -46,10 +49,13 @@
                 @Html.DisplayFor(modelItem => item.Telefono)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkClienteNavigation.ClaseCiente)
+                @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkTipoComunicacionNavigation.Id)
+                @Html.DisplayFor(modelItem => item.FkClienteNavigation.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkPerfilAnalistaNavigation.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FkTipoReferenciaNavigation.Id)

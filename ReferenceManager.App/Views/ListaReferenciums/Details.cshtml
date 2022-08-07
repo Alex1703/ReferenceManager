@@ -29,16 +29,22 @@
             @Html.DisplayFor(model => model.Telefono)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FkClienteNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FkClienteNavigation.ClaseCiente)
+            @Html.DisplayFor(model => model.FkClienteNavigation.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FkTipoComunicacionNavigation)
+            @Html.DisplayNameFor(model => model.FkPerfilAnalistaNavigation)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FkTipoComunicacionNavigation.Id)
+            @Html.DisplayFor(model => model.FkPerfilAnalistaNavigation.Id)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FkTipoReferenciaNavigation)

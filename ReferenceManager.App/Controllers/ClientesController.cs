@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
+using ReferenceManager.App.Models.Enum;
 
 namespace ReferenceManager.App.Controllers
 {
     public class ClientesController : Controller
     {
         private readonly DBReferenciasContext _context;
-        private Int64 _identificacion;
-        private string _tipoCliente;
 
         public ClientesController(DBReferenciasContext context)
         {
@@ -58,16 +53,15 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Cliente cliente)
+        public async Task<IActionResult> Create(Cliente cliente,string txtIdComercial)
         {
             if (ModelState.IsValid)
             {
-                if (cliente.FkCliente != null)
-                {
-
-                }
+                cliente.FkCliente = cliente.FkCliente == 0 ? null : cliente.FkCliente;
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
+                var comercial = ViewData["Comercial"] != null ? (Comercial)ViewData["Comercial"] : null;
+                CreateCaso(cliente,Convert.ToInt32(txtIdComercial));
                 return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = cliente.Id });
             }
             ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Nombre", cliente.FkTipoCliente);
@@ -175,29 +169,25 @@ namespace ReferenceManager.App.Controllers
         {
             try
             {
-                _identificacion = Convert.ToInt64(idComercial);
-                _tipoCliente = isTitular;
                 Comercial comercial = null;
                 if (isTitular == "1")
                 {
                     comercial = _context.Comercials.Include(x => x.FkZonaNavigation).FirstOrDefault(a => a.Cedula == idComercial);
                 }
-                else {
-                    comercial = _context.Clientes.
-                        Include(x => x.FkComercialNavigation).
-                        Include(z=>z.FkComercialNavigation.FkZonaNavigation).
-                        Where(x => x.FkCliente == null && x.NoIdentificacion == Convert.ToInt64(idComercial)).
-                        Select(x => new Comercial {
-                            Id = x.FkComercialNavigation.Id, 
-                            Nombre = x.FkComercialNavigation.Nombre,
-                            Cedula = x.FkComercialNavigation.Cedula,
-                            FkZonaNavigation = x.FkComercialNavigation.FkZonaNavigation,
-                            Clientes = x.FkComercialNavigation.Clientes
-                        }).FirstOrDefault();
-                    ViewData["IdCliente"] = comercial.Clientes.Where(x=>x.FkCliente == null).FirstOrDefault().Id;
+                else
+                {
+                    var Casos = _context.Casos
+                        .Include(x => x.FkClienteNavigation)
+                        .Include(j => j.FkComercialNavigation)
+                        .Include(z => z.FkComercialNavigation.FkZonaNavigation)
+                        .Where(x => x.Estado == EstadoSolicitud.Abierto.ToString() && x.FkClienteNavigation.NoIdentificacion == Convert.ToInt64(idComercial)).FirstOrDefault();
+
+                    comercial = Casos.FkComercialNavigation;
+
+                    ViewData["IdCliente"] = Casos.FkClienteNavigation.NoIdentificacion;
                 }
-                
-                if (comercial != null) 
+
+                if (comercial != null)
                 {
                     ViewData["identificacion"] = idComercial;
                     ViewData["isTitular"] = isTitular;
@@ -207,10 +197,10 @@ namespace ReferenceManager.App.Controllers
                 {
                     ViewData["Mensaje"] = "No se encontrol el usuario";
                 }
-                    
+
 
                 ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Nombre");
-                
+
                 return View("Create");
             }
             catch (Exception)
@@ -229,6 +219,24 @@ namespace ReferenceManager.App.Controllers
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        private void CreateCaso(Cliente cliente, int idComercial) 
+        {
+            try
+            {
+                var caso = new Caso()
+                {
+                    FkCliente = cliente.FkCliente,
+                    FkComercial = idComercial
+                };
+                _context.Add(caso);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

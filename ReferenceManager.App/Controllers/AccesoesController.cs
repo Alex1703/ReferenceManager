@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
 
@@ -21,9 +16,9 @@ namespace ReferenceManager.App.Controllers
         // GET: Accesoes
         public async Task<IActionResult> Index()
         {
-              return _context.Accesos != null ? 
-                          View(await _context.Accesos.ToListAsync()) :
-                          Problem("Entity set 'DBReferenciasContext.Accesos'  is null.");
+            return _context.Accesos != null ?
+                        View(await _context.Accesos.ToListAsync()) :
+                        Problem("Entity set 'DBReferenciasContext.Accesos'  is null.");
         }
 
         // GET: Accesoes/Details/5
@@ -149,14 +144,14 @@ namespace ReferenceManager.App.Controllers
             {
                 _context.Accesos.Remove(acceso);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AccesoExists(int id)
         {
-          return (_context.Accesos?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Accesos?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

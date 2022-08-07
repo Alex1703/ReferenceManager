@@ -9,6 +9,7 @@
     var OcultarFiltro = "";
     var idCliente = 0;
     var temp = ViewBag.isTitular != null ? ViewBag.isTitular : "0";
+    var idComercial = 0;
 
     var ErrorMsm = ViewData["Mensaje"] != null ? ViewData["Mensaje"].ToString().Length : 0;
     var Mensaje = ViewData["Mensaje"] != null ? ViewData["Mensaje"].ToString() : "";
@@ -16,6 +17,7 @@
     if (ViewData["Comercial"] != null)
     {
         comercial = (Comercial)ViewData["Comercial"];
+        idComercial = comercial.Id;
         txtidentificacion = comercial.Cedula;
         isVisible = "";
         OcultarFiltro = "none";
@@ -249,12 +251,6 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label asp-for="FkComercial" class="control-label"></label>
-                            <input asp-for="FkComercial" class="form-control" value="@comercial.Id">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
                             <label asp-for="FkCliente" class="control-label"></label>
                             <input asp-for="FkCliente" class="form-control" value="@idCliente">
                         </div>
@@ -270,6 +266,7 @@
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
+                <input type="text" id="txtIdComercial" name="txtIdComercial" value="@idComercial" style="display:none">
             </form>
         </div>
         <div class="col-md-2"></div>

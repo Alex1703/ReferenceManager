@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
 
@@ -21,9 +16,9 @@ namespace ReferenceManager.App.Controllers
         // GET: Perfils
         public async Task<IActionResult> Index()
         {
-              return _context.Perfils != null ? 
-                          View(await _context.Perfils.ToListAsync()) :
-                          Problem("Entity set 'DBReferenciasContext.Perfils'  is null.");
+            return _context.Perfils != null ?
+                        View(await _context.Perfils.ToListAsync()) :
+                        Problem("Entity set 'DBReferenciasContext.Perfils'  is null.");
         }
 
         // GET: Perfils/Details/5
@@ -149,14 +144,14 @@ namespace ReferenceManager.App.Controllers
             {
                 _context.Perfils.Remove(perfil);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PerfilExists(int id)
         {
-          return (_context.Perfils?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Perfils?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
