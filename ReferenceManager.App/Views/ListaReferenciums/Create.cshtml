@@ -30,8 +30,8 @@
                 <select asp-for="FkTipoReferencia" class="form-control" asp-items="ViewBag.FkTipoReferencia"></select>
             </div>
             <div class="form-group" style="display:none">
-                <label asp-for="FkPerfilAnalista" class="control-label"></label>
-                <select asp-for="FkPerfilAnalista" class="form-control" asp-items="ViewBag.FkPerfilAnalista"></select>
+                <label asp-for="FkUsuario" class="control-label"></label>
+                <select asp-for="FkUsuario" class="form-control" asp-items="ViewBag.FkPerfilAnalista"></select>
             </div>
             <div class="form-group">
                 <br />
@@ -87,7 +87,7 @@
                         @Html.DisplayFor(modelItem => item.FkClienteNavigation.FullName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FkPerfilAnalistaNavigation.FkUsuarioNavigation.Nombre)
+                        @Html.DisplayFor(modelItem => item.FkUsuarioNavigation.Nombre)
                     </td>
 
                 </tr>

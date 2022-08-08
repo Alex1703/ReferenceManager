@@ -12,10 +12,13 @@ namespace ReferenceManager.App.Models
         }
 
         public int Id { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public bool? Activio { get; set; }
+        public int? FkUsuario { get; set; }
 
+        public virtual Usuario FkUsuarioNavigation { get; set; }
         public virtual ICollection<DetallePerfilAcceso> DetallePerfilAccesos { get; set; }
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }

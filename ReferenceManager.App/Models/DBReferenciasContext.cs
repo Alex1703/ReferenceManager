@@ -22,9 +22,9 @@ namespace ReferenceManager.App.Models
         public virtual DbSet<Comercial> Comercials { get; set; }
         public virtual DbSet<DetalleComunicacion> DetalleComunicacions { get; set; }
         public virtual DbSet<DetallePerfilAcceso> DetallePerfilAccesos { get; set; }
+        public virtual DbSet<GestionReferencium> GestionReferencia { get; set; }
         public virtual DbSet<ListaReferencium> ListaReferencia { get; set; }
         public virtual DbSet<Perfil> Perfils { get; set; }
-        public virtual DbSet<PerfilAnalistum> PerfilAnalista { get; set; }
         public virtual DbSet<RefArrendadorLocal> RefArrendadorLocals { get; set; }
         public virtual DbSet<RefArrendadorViviendum> RefArrendadorVivienda { get; set; }
         public virtual DbSet<RefFamiliar> RefFamiliars { get; set; }
@@ -38,6 +38,8 @@ namespace ReferenceManager.App.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=MSI\\SQLEXPRESS;Database=DBReferencias;Trusted_Connection=True;");
             }
         }
 
@@ -72,12 +74,12 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkClienteNavigation)
                     .WithMany(p => p.Casos)
                     .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__Caso__Fk_Cliente__5070F446");
+                    .HasConstraintName("FK__Caso__Fk_Cliente__52593CB8");
 
                 entity.HasOne(d => d.FkComercialNavigation)
                     .WithMany(p => p.Casos)
                     .HasForeignKey(d => d.FkComercial)
-                    .HasConstraintName("FK__Caso__Fk_Comerci__5165187F");
+                    .HasConstraintName("FK__Caso__Fk_Comerci__534D60F1");
             });
 
             modelBuilder.Entity<Cliente>(entity =>
@@ -141,12 +143,12 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkClienteNavigation)
                     .WithMany(p => p.InverseFkClienteNavigation)
                     .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__Cliente__Fk_Clie__52593CB8");
+                    .HasConstraintName("FK__Cliente__Fk_Clie__5441852A");
 
                 entity.HasOne(d => d.FkTipoClienteNavigation)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.FkTipoCliente)
-                    .HasConstraintName("FK__Cliente__Fk_Tipo__534D60F1");
+                    .HasConstraintName("FK__Cliente__Fk_Tipo__5535A963");
             });
 
             modelBuilder.Entity<Comercial>(entity =>
@@ -168,7 +170,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkZonaNavigation)
                     .WithMany(p => p.Comercials)
                     .HasForeignKey(d => d.FkZona)
-                    .HasConstraintName("FK__Comercial__Fk_Zo__5441852A");
+                    .HasConstraintName("FK__Comercial__Fk_Zo__5629CD9C");
             });
 
             modelBuilder.Entity<DetalleComunicacion>(entity =>
@@ -181,7 +183,7 @@ namespace ReferenceManager.App.Models
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FkPerfilAnalista).HasColumnName("Fk_PerfilAnalista");
+                entity.Property(e => e.FkListaReferencia).HasColumnName("Fk_ListaReferencia");
 
                 entity.Property(e => e.FkRefArrendadorLocal).HasColumnName("Fk_RefArrendadorLocal");
 
@@ -191,30 +193,37 @@ namespace ReferenceManager.App.Models
 
                 entity.Property(e => e.FkRefProveedor).HasColumnName("Fk_RefProveedor");
 
-                entity.HasOne(d => d.FkPerfilAnalistaNavigation)
+                entity.Property(e => e.FkUsuario).HasColumnName("Fk_Usuario");
+
+                entity.HasOne(d => d.FkListaReferenciaNavigation)
                     .WithMany(p => p.DetalleComunicacions)
-                    .HasForeignKey(d => d.FkPerfilAnalista)
-                    .HasConstraintName("FK__DetalleCo__Fk_Pe__6A30C649");
+                    .HasForeignKey(d => d.FkListaReferencia)
+                    .HasConstraintName("FK__DetalleCo__Fk_Li__571DF1D5");
 
                 entity.HasOne(d => d.FkRefArrendadorLocalNavigation)
                     .WithMany(p => p.DetalleComunicacions)
                     .HasForeignKey(d => d.FkRefArrendadorLocal)
-                    .HasConstraintName("FK__DetalleCo__Fk_Re__6B24EA82");
+                    .HasConstraintName("FK__DetalleCo__Fk_Re__59063A47");
 
                 entity.HasOne(d => d.FkRefArrendadorViviendaNavigation)
                     .WithMany(p => p.DetalleComunicacions)
                     .HasForeignKey(d => d.FkRefArrendadorVivienda)
-                    .HasConstraintName("FK__DetalleCo__Fk_Re__6C190EBB");
+                    .HasConstraintName("FK__DetalleCo__Fk_Re__59FA5E80");
 
                 entity.HasOne(d => d.FkRefFamiliarNavigation)
                     .WithMany(p => p.DetalleComunicacions)
                     .HasForeignKey(d => d.FkRefFamiliar)
-                    .HasConstraintName("FK__DetalleCo__Fk_Re__6D0D32F4");
+                    .HasConstraintName("FK__DetalleCo__Fk_Re__5AEE82B9");
 
                 entity.HasOne(d => d.FkRefProveedorNavigation)
                     .WithMany(p => p.DetalleComunicacions)
                     .HasForeignKey(d => d.FkRefProveedor)
-                    .HasConstraintName("FK__DetalleCo__Fk_Re__6E01572D");
+                    .HasConstraintName("FK__DetalleCo__Fk_Re__5BE2A6F2");
+
+                entity.HasOne(d => d.FkUsuarioNavigation)
+                    .WithMany(p => p.DetalleComunicacions)
+                    .HasForeignKey(d => d.FkUsuario)
+                    .HasConstraintName("FK__DetalleCo__Fk_Us__5812160E");
             });
 
             modelBuilder.Entity<DetallePerfilAcceso>(entity =>
@@ -230,12 +239,35 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkAccesoNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkAcceso)
-                    .HasConstraintName("FK__DetallePe__FK_Ac__5535A963");
+                    .HasConstraintName("FK__DetallePe__FK_Ac__5CD6CB2B");
 
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.DetallePerfilAccesos)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__DetallePe__Fk_Pe__5629CD9C");
+                    .HasConstraintName("FK__DetallePe__Fk_Pe__5DCAEF64");
+            });
+
+            modelBuilder.Entity<GestionReferencium>(entity =>
+            {
+                entity.Property(e => e.Estado)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FkListaReferencia).HasColumnName("Fk_ListaReferencia");
+
+                entity.Property(e => e.FkUsuario).HasColumnName("Fk_Usuario");
+
+                entity.Property(e => e.FullUrlRef).HasMaxLength(300);
+
+                entity.HasOne(d => d.FkListaReferenciaNavigation)
+                    .WithMany(p => p.GestionReferencia)
+                    .HasForeignKey(d => d.FkListaReferencia)
+                    .HasConstraintName("FK__GestionRe__Fk_Li__5EBF139D");
+
+                entity.HasOne(d => d.FkUsuarioNavigation)
+                    .WithMany(p => p.GestionReferencia)
+                    .HasForeignKey(d => d.FkUsuario)
+                    .HasConstraintName("FK__GestionRe__Fk_Us__5FB337D6");
             });
 
             modelBuilder.Entity<ListaReferencium>(entity =>
@@ -249,9 +281,9 @@ namespace ReferenceManager.App.Models
 
                 entity.Property(e => e.FkCliente).HasColumnName("Fk_Cliente");
 
-                entity.Property(e => e.FkPerfilAnalista).HasColumnName("Fk_PerfilAnalista");
-
                 entity.Property(e => e.FkTipoReferencia).HasColumnName("Fk_TipoReferencia");
+
+                entity.Property(e => e.FkUsuario).HasColumnName("Fk_Usuario");
 
                 entity.Property(e => e.PersonaContacto)
                     .HasMaxLength(40)
@@ -264,17 +296,17 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkClienteNavigation)
                     .WithMany(p => p.ListaReferencia)
                     .HasForeignKey(d => d.FkCliente)
-                    .HasConstraintName("FK__ListaRefe__Fk_Cl__571DF1D5");
-
-                entity.HasOne(d => d.FkPerfilAnalistaNavigation)
-                    .WithMany(p => p.ListaReferencia)
-                    .HasForeignKey(d => d.FkPerfilAnalista)
-                    .HasConstraintName("FK__ListaRefe__Fk_Pe__5812160E");
+                    .HasConstraintName("FK__ListaRefe__Fk_Cl__60A75C0F");
 
                 entity.HasOne(d => d.FkTipoReferenciaNavigation)
                     .WithMany(p => p.ListaReferencia)
                     .HasForeignKey(d => d.FkTipoReferencia)
-                    .HasConstraintName("FK__ListaRefe__Fk_Ti__59063A47");
+                    .HasConstraintName("FK__ListaRefe__Fk_Ti__628FA481");
+
+                entity.HasOne(d => d.FkUsuarioNavigation)
+                    .WithMany(p => p.ListaReferencia)
+                    .HasForeignKey(d => d.FkUsuario)
+                    .HasConstraintName("FK__ListaRefe__Fk_Us__619B8048");
             });
 
             modelBuilder.Entity<Perfil>(entity =>
@@ -283,29 +315,24 @@ namespace ReferenceManager.App.Models
 
                 entity.Property(e => e.Activio).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.Descripcion)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nombre)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<PerfilAnalistum>(entity =>
-            {
-                entity.Property(e => e.Activio).HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.Codigo)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FkUsuario).HasColumnName("Fk_Usuario");
 
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.FkUsuarioNavigation)
-                    .WithMany(p => p.PerfilAnalista)
+                    .WithMany(p => p.Perfils)
                     .HasForeignKey(d => d.FkUsuario)
-                    .HasConstraintName("FK__PerfilAna__Fk_Us__59FA5E80");
+                    .HasConstraintName("FK__Perfil__Fk_Usuar__6383C8BA");
             });
 
             modelBuilder.Entity<RefArrendadorLocal>(entity =>
@@ -590,7 +617,7 @@ namespace ReferenceManager.App.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Tabla)
-                    .HasMaxLength(20)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Url).HasMaxLength(200);
@@ -600,10 +627,10 @@ namespace ReferenceManager.App.Models
             {
                 entity.ToTable("Usuario");
 
-                entity.HasIndex(e => e.Correo, "UQ__Usuario__60695A1948C9D8FC")
+                entity.HasIndex(e => e.Correo, "UQ__Usuario__60695A19778C6F12")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Identificacion, "UQ__Usuario__D6F931E5EE676794")
+                entity.HasIndex(e => e.Identificacion, "UQ__Usuario__D6F931E5C55DEAAD")
                     .IsUnique();
 
                 entity.Property(e => e.Activio)
@@ -631,7 +658,7 @@ namespace ReferenceManager.App.Models
                 entity.HasOne(d => d.FkPerfilNavigation)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.FkPerfil)
-                    .HasConstraintName("FK__Usuario__Fk_Perf__5AEE82B9");
+                    .HasConstraintName("FK__Usuario__Fk_Perf__6477ECF3");
             });
 
             modelBuilder.Entity<Zona>(entity =>

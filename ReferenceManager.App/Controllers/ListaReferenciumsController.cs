@@ -22,7 +22,7 @@ namespace ReferenceManager.App.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkPerfilAnalistaNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
+            var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkUsuarioNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
             return View(await dBReferenciasContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace ReferenceManager.App.Controllers
 
             var listaReferencium = await _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkUsuarioNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (listaReferencium == null)
@@ -54,13 +54,13 @@ namespace ReferenceManager.App.Controllers
             ViewData["FkCliente"] = new SelectList(_context.Clientes
                 .Where(x => x.Id == Convert.ToInt32(idCliente))
                 .Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
-            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id");
+            ViewData["FkUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
             var referencias = _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkUsuarioNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation.FkUsuarioNavigation)
+                .Include(l => l.FkUsuarioNavigation)
                 .Where(x => x.FkCliente == (int)TempData["idCliente"]).ToList();
 
             ViewData["ListaReferencia"] = referencias.Count > 0 ? referencias : null;
@@ -81,13 +81,12 @@ namespace ReferenceManager.App.Controllers
                 await _context.SaveChangesAsync();
             }
             ViewData["FkCliente"] = new SelectList(_context.Clientes.Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
-            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id");
+            ViewData["FkUsuarios"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
             ViewData["ListaReferencia"] = _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkUsuarioNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation.FkUsuarioNavigation)
                 .Where(x => x.FkCliente == (int)TempData["idCliente"]);
             return View();
         }
@@ -106,7 +105,6 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "Id", listaReferencium.FkCliente);
-            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id", listaReferencium.FkPerfilAnalista);
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
             return View(listaReferencium);
         }
@@ -144,7 +142,6 @@ namespace ReferenceManager.App.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "Id", listaReferencium.FkCliente);
-            ViewData["FkPerfilAnalista"] = new SelectList(_context.PerfilAnalista, "Id", "Id", listaReferencium.FkPerfilAnalista);
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
             return View(listaReferencium);
         }
@@ -159,7 +156,7 @@ namespace ReferenceManager.App.Controllers
 
             var listaReferencium = await _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkPerfilAnalistaNavigation)
+                .Include(l => l.FkUsuarioNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (listaReferencium == null)

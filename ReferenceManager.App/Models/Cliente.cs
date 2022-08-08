@@ -79,7 +79,7 @@ namespace ReferenceManager.App.Models
         {
             get
             {
-                return this.PrimerNombre+ " " + SegundoNombre + " " + PrimerApellido + " " + SegundoApellido;
+                return (PrimerNombre+" "+SegundoNombre+" "+PrimerApellido+" "+SegundoApellido);
             }
         }
     }

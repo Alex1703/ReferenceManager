@@ -38,8 +38,9 @@ namespace ReferenceManager.App.Controllers
         }
 
         // GET: RefFamiliars/Create
-        public IActionResult Create()
+        public IActionResult Create(string Id)
         {
+            
             return View();
         }
 
