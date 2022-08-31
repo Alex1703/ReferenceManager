@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReferenceManager.App.Models
 {
@@ -11,6 +12,8 @@ namespace ReferenceManager.App.Models
         }
 
         public int Id { get; set; }
+
+        [Required]
         public string ConfirmacionNombre { get; set; }
         public string Parentezco { get; set; }
         public string EstadoCivil { get; set; }

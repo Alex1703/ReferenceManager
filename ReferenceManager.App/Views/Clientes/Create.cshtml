@@ -309,14 +309,14 @@
 
         $("#idComercial").change(function() {
             window.setTimeout(function() {
-                debugger;
+                
                 if ($("#isTitular").val() == "2")
                     $("#FkCliente").val($("#idComercial").val())
             }, 2000);
         });
 
         $("#isTitular").change(function() {
-            debugger;
+            
             var value = $(this).val();
             var Identificacion = "";
 

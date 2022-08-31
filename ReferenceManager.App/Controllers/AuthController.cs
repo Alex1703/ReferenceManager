@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Core.Filters;
 using ReferenceManager.App.Models;
 using ReferenceManager.App.Models.Enum;
 using ReferenceManager.App.Models.Login;
+using System.Data.SqlTypes;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
@@ -44,10 +46,16 @@ namespace ReferenceManager.App.Controllers
                     return Problem("La contraseña es incorrecta.");
                 }
 
-                string token = _tokenService.CreatedToken(usuario);
+                string token = _tokenService.CreatedToken(usuario);                
+
                 if (!string.IsNullOrEmpty(token))
                 {
                     HttpContext.Session.SetString("JWToken", token);
+
+                    var temp = new JwtSecurityTokenHandler().ReadJwtToken(token);
+                    HttpContext.Session.SetString("IdUsuario", temp.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value);
+                    HttpContext.Session.SetString("Name", temp.Claims.FirstOrDefault(x => x.Type.Contains("name")).Value);
+                    HttpContext.Session.SetString("Actor", temp.Claims.FirstOrDefault(x => x.Type.Contains("actor")).Value);
                 }
                 ChangeUpdateOnLine(usuario, OnlineStatus.Conectado);
                 if (!IsFirstEntry(model.Password))

@@ -60,7 +60,6 @@ namespace ReferenceManager.App.Controllers
                 cliente.FkCliente = cliente.FkCliente == 0 ? null : cliente.FkCliente;
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
-                var comercial = ViewData["Comercial"] != null ? (Comercial)ViewData["Comercial"] : null;
                 CreateCaso(cliente,Convert.ToInt32(txtIdComercial));
                 return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = cliente.Id });
             }

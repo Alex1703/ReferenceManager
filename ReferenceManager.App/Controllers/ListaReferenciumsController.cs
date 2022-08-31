@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -73,22 +74,31 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,Estado,FkPerfilAnalista")] ListaReferencium listaReferencium)
+        public async Task<IActionResult> Create([Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,Estado,FkPerfilAnalista")] ListaReferencium listaReferencium, string idCliente)
         {
             if (ModelState.IsValid)
             {
+                var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
+                var idUser = Convert.ToInt32(jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value);
+
+                listaReferencium.FkUsuario = idUser;
                 _context.Add(listaReferencium);
                 await _context.SaveChangesAsync();
             }
             ViewData["FkCliente"] = new SelectList(_context.Clientes.Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
             ViewData["FkUsuarios"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
-            ViewData["ListaReferencia"] = _context.ListaReferencia
-                .Include(l => l.FkClienteNavigation)
-                .Include(l => l.FkUsuarioNavigation)
-                .Include(l => l.FkTipoReferenciaNavigation)
-                .Where(x => x.FkCliente == (int)TempData["idCliente"]);
-            return View();
+
+            var referencias = _context.ListaReferencia
+              .Include(l => l.FkClienteNavigation)
+              .Include(l => l.FkUsuarioNavigation)
+              .Include(l => l.FkTipoReferenciaNavigation)
+              .Include(l => l.FkUsuarioNavigation)
+              .Where(x => x.FkCliente == Convert.ToInt32(idCliente)).ToList();
+
+            ViewData["ListaReferencia"] = referencias.Count > 0 ? referencias : null;
+
+            return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = idCliente });
         }
 
         // GET: ListaReferenciums/Edit/5

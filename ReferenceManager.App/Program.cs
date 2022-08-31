@@ -1,55 +1,35 @@
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using ReferenceManager.App.Core;
 using ReferenceManager.App.Core.Filters;
+using ReferenceManager.App.Core.Hubs;
+using ReferenceManager.App.Core.MiddlewareExtensions;
+using ReferenceManager.App.Core.SubscribeTableDependencies;
 using ReferenceManager.App.Models;
-using System.Globalization;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider(); ;
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<DBReferenciasContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseReferencias"));
 });
 
+//DI
+builder.Services.AddSingleton<GestionReferenciaHub>();
+builder.Services.AddSingleton<SqlDependencyServiceReferencia>();
+builder.Services.AddSingleton<IGestionReferenciaRepository, GestionReferenciaRepository>();
 builder.Services.AddSingleton<ITokenService, TokenService>();
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
-
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedCultures = new[]
-    {
-        new CultureInfo("es-CO"),
-        new CultureInfo("en-US"),
-        new CultureInfo("fa-IR"),
-        new CultureInfo("de-DE")
-    };
-
-    options.DefaultRequestCulture = new RequestCulture(culture: "es-CO", uiCulture: "es-CO");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
-
-    var defaultCookieRequestProvider =
-        options.RequestCultureProviders.FirstOrDefault(rcp =>
-            rcp.GetType() == typeof(CookieRequestCultureProvider));
-    if (defaultCookieRequestProvider != null)
-        options.RequestCultureProviders.Remove(defaultCookieRequestProvider);
-
-    options.RequestCultureProviders.Insert(0,
-        new CookieRequestCultureProvider()
-        {
-            CookieName = ".AspNetCore.Culture",
-            Options = options
-        });
 });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -59,7 +39,9 @@ builder.Services.AddMvc()
                 LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization();
 
+
 var app = builder.Build();
+var connectionString = app.Configuration.GetConnectionString("DataBaseReferencias");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -77,8 +59,6 @@ app.UseRouting();
 app.UseCookiePolicy();
 app.UseSession();
 
-
-
 app.Use(async (context, next) =>
 {
     var JWToken = context.Session.GetString("JWToken");
@@ -86,16 +66,26 @@ app.Use(async (context, next) =>
     {
         context.Request.Headers.Add("Authorization", "Bearer" + JWToken);
     }
+
     await next();
 });
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<GestionReferenciaHub>("/GestionReferenciaHub");
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Auth}/{action=Index}/{id?}");
 
+
+/*
+ * we must call SubscribeTableDependency() here
+ * we create one middleware and call SubscribeTableDependency() method in the middleware
+ */
+app.UseSqlTableDependency<SqlDependencyServiceReferencia>();
 
 
 app.Run();
