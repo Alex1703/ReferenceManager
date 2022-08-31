@@ -45,6 +45,8 @@ connection.on("ReceivedGestionReferencia", function (ListReferencias) {
     debuggerz
     if (ListReferencias != null & ListReferencias.length>0) {
         BindListReferenciasInConsole(ListReferencias);
+    } else {
+        AutoAsignarReferencia();
     }
     
 });
@@ -56,7 +58,7 @@ function BindListReferenciasInConsole(ListReferencias) {
             <a id = "linkNotiItem" href = "{UrlFull}" style = " color: #000;  text-decoration: none;">      \
                 <span style="font-weight:bolder">Tipo de Referencia </span><br/>                     \
                 <span>{TipoRef}</span><br/>                                                           \
-                <span style="font-weight:bolder">Nombre  </span><br/>                                \
+                <span style="font-weight:bolder">Nombre del Cliente</span><br/>                                \
                 <span>{Nombre}</span><br/>                                                           \
             </a>                                                                                     \
             <hr/>                                                                                    \
@@ -78,4 +80,13 @@ function BindListReferenciasInConsole(ListReferencias) {
         content.append(notiItem)
     });
 
+}
+
+
+function AutoAsignarReferencia()
+{
+    var idUser = parseInt($("#lblUserName").data("id"));
+    connection.invoke("AutoAsignacionGestionReferencia", idUser).catch(function (err) {
+        return console.error(err.toString());
+    });
 }

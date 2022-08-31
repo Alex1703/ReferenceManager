@@ -25,5 +25,10 @@ namespace ReferenceManager.App.Core.Hubs
             var ListReferencias = _repository.ObtenerReferenciasByIdUser(idUser);
             await Clients.All.SendAsync("ReceivedGestionReferenciaByUser", ListReferencias);
         }
+
+        public async Task AutoAsignacionGestionReferencia(int idUser)
+        {
+            _repository.AutoAsignacion(idUser);
+        }
     }
 }

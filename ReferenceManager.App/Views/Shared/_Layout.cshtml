@@ -29,50 +29,56 @@
                 </a>
             </header>
             <nav class="dashboard-nav-list">
-                <a href="principal.html" class="dashboard-nav-item">
+                <a asp-controller="Home" asp-action="index" class="dashboard-nav-item">
                     <i class="fas fa-home"></i> Inicio
                 </a>
 
-                <div class="dashboard-nav-dropdown">
-                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-                        <i class="fas fa-cogs"></i> Administracion Usuarios
-                    </a>
-                    <div class="dashboard-nav-dropdown-menu">
-                        <a asp-controller="Usuarios" asp-action="index" class="dashboard-nav-dropdown-item">Usuarios</a>
-                        <a asp-controller="Perfils" asp-action="index" class="dashboard-nav-dropdown-item">Perfiles</a>
-                        <a asp-controller="Accesoes" asp-action="index" class="dashboard-nav-dropdown-item">Accesos</a>
+                @if (actor == "Administrador")
+                {
+                    <div class="dashboard-nav-dropdown">
+                        <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                            <i class="fas fa-cogs"></i> Administracion Usuarios
+                        </a>
+                        <div class="dashboard-nav-dropdown-menu">
+                            <a asp-controller="Usuarios" asp-action="index" class="dashboard-nav-dropdown-item">Usuarios</a>
+                            <a asp-controller="Perfils" asp-action="index" class="dashboard-nav-dropdown-item">Perfiles</a>
+                            <a asp-controller="Accesoes" asp-action="index" class="dashboard-nav-dropdown-item">Accesos</a>
+                        </div>
                     </div>
-                </div>
+                }
+                @if (actor == "Auxiliar" || actor == "Administrador")
+                {
+                    <div class="dashboard-nav-dropdown">
+                        <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                            <i class="fas fa-users"></i>
+                            Cargue
+                        </a>
+                        <div class="dashboard-nav-dropdown-menu">
+                            <a asp-controller="Clientes" asp-action="Create" class="dashboard-nav-dropdown-item">Agregar Cliente</a>
+                        </div>
+                        <div class="dashboard-nav-dropdown-menu">
+                            <a asp-controller="ListaReferenciums" asp-action="index" class="dashboard-nav-dropdown-item">Agregar Referencia</a>
+                        </div>
+                        <div class="dashboard-nav-dropdown-menu">
+                            <a asp-controller="Clientes" asp-action="Create" class="dashboard-nav-dropdown-item">Actualizar Cambio</a>
+                        </div>
+                    </div>
+                }
+                @if (actor == "Coordinador Comercial" || actor == "Supervisor" || actor == "Auxiliar" || actor == "Administrador")
+                {
+                    <div class="dashboard-nav-dropdown">
 
-                <div class="dashboard-nav-dropdown">
-                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-                        <i class="fas fa-photo-video"></i> Administracion Plantillas
-                    </a>
-                    <div class="dashboard-nav-dropdown-menu">
-                        <a asp-controller="Plantillas" asp-action="index" class="dashboard-nav-dropdown-item">Plantilla</a>
-                        <a asp-controller="PlantillaCampoes" asp-action="index" class="dashboard-nav-dropdown-item">Plantilla Campos</a>
-                        <a asp-controller="Campoes" asp-action="index" class="dashboard-nav-dropdown-item">Campos</a>
-                    </div>
-                </div>
-                <div class="dashboard-nav-dropdown">
-                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-                        <i class="fas fa-users"></i>
-                        Referencias
-                    </a>
-                    <div class="dashboard-nav-dropdown-menu">
-                        <a asp-controller="Clientes" asp-action="Create" class="dashboard-nav-dropdown-item">Gestionar</a>
-                    </div>
-                </div>
-                <div class="dashboard-nav-dropdown">
-                    <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
-                        <i class="fas fa-money-check-alt"></i> Reportes
-                    </a>
-                    <div class="dashboard-nav-dropdown-menu">
-                        <a href="Reportes\ConsultarCliente.html" class="dashboard-nav-dropdown-item">Consultar Cliente</a>
-                        <a href="Reportes\GenerarPDF.html" class="dashboard-nav-dropdown-item">Generar PDF's</a>
+                        <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle">
+                            <i class="fas fa-money-check-alt"></i> Reportes
+                        </a>
+                        <div class="dashboard-nav-dropdown-menu">
+                            <a href="Reportes\ConsultarCliente.html" class="dashboard-nav-dropdown-item">Consultar Cliente</a>
+                            <a href="Reportes\GenerarPDF.html" class="dashboard-nav-dropdown-item">Generar PDF's</a>
+
+                        </div>
 
                     </div>
-                </div>
+                }
 
                 <div class="nav-item-divider"></div>
                 <a href="@Url.Action("LogOff","Auth")" class="dashboard-nav-item">

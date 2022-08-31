@@ -13,6 +13,11 @@ namespace ReferenceManager.App.Core
             _configuration = configuration;
         }
 
+        public void AutoAsignacion(int idUser)
+        {//AutoAsignacionReferencia
+            throw new NotImplementedException();
+        }
+
         public List<GestionReferencium> ObtenerReferencias()
         {
             try

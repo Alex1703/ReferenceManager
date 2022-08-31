@@ -23,8 +23,9 @@ namespace ReferenceManager.App.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkUsuarioNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
-            return View(await dBReferenciasContext.ToListAsync());
+            //var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkUsuarioNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
+            //await dBReferenciasContext.ToListAsync()
+            return View();
         }
 
         // GET: ListaReferenciums/Details/5

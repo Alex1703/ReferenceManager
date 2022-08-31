@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReferenceManager.App.Models
 {
@@ -15,6 +16,8 @@ namespace ReferenceManager.App.Models
         public int Id { get; set; }
         public bool? Activio { get; set; }
         public int? FkTipoCliente { get; set; }
+        [Required]
+        [Display(Name = "Primer Nombre")]
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }
