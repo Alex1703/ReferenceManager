@@ -42,13 +42,14 @@ connection.on("ReceivedGestionReferenciaByUser", function (ListReferencias) {
 });
 
 connection.on("ReceivedGestionReferencia", function (ListReferencias) {
-    debuggerz
+    var perfil = $("#lblUserActor").text();
+    debugger;
     if (ListReferencias != null & ListReferencias.length>0) {
         BindListReferenciasInConsole(ListReferencias);
-    } else {
+    } else if (perfil == "Auxiliar") {
+        debugger;
         AutoAsignarReferencia();
     }
-    
 });
 
 function BindListReferenciasInConsole(ListReferencias) {

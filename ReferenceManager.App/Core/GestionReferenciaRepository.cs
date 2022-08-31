@@ -1,6 +1,7 @@
 ﻿using ReferenceManager.App.Models;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 
 namespace ReferenceManager.App.Core
@@ -15,7 +16,16 @@ namespace ReferenceManager.App.Core
 
         public void AutoAsignacion(int idUser)
         {//AutoAsignacionReferencia
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(_configuration.GetConnectionString("DataBaseReferencias")))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("Sp_AutoAsignacionReferencia", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@idUser", idUser));
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<GestionReferencium> ObtenerReferencias()
