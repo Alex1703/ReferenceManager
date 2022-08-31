@@ -4,75 +4,75 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>RefFamiliar</h4>
+
+<h4>Referencia Familiar</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="">
+        <form asp-action="Create" id="formRef">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="ConfirmacionNombre" class="control-label"></label>
                 <input asp-for="ConfirmacionNombre" class="form-control" />
                 <span asp-validation-for="ConfirmacionNombre" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="Parentezco" class="control-label"></label>
                 <input asp-for="Parentezco" class="form-control" />
                 <span asp-validation-for="Parentezco" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="EstadoCivil" class="control-label"></label>
                 <input asp-for="EstadoCivil" class="form-control" />
                 <span asp-validation-for="EstadoCivil" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="NombreConyuge" class="control-label"></label>
                 <input asp-for="NombreConyuge" class="form-control" />
                 <span asp-validation-for="NombreConyuge" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="CantidadHijos" class="control-label"></label>
                 <input asp-for="CantidadHijos" class="form-control" />
                 <span asp-validation-for="CantidadHijos" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="QuienVive" class="control-label"></label>
                 <input asp-for="QuienVive" class="form-control" />
                 <span asp-validation-for="QuienVive" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="Actividad" class="control-label"></label>
                 <input asp-for="Actividad" class="form-control" />
                 <span asp-validation-for="Actividad" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="TiempoNegocio" class="control-label"></label>
                 <input asp-for="TiempoNegocio" class="form-control" />
                 <span asp-validation-for="TiempoNegocio" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="BarrioNegocio" class="control-label"></label>
                 <input asp-for="BarrioNegocio" class="form-control" />
                 <span asp-validation-for="BarrioNegocio" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="CantidadEmpleados" class="control-label"></label>
                 <input asp-for="CantidadEmpleados" class="form-control" />
                 <span asp-validation-for="CantidadEmpleados" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="DireccionTelefono" class="control-label"></label>
                 <input asp-for="DireccionTelefono" class="form-control" />
                 <span asp-validation-for="DireccionTelefono" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <label asp-for="Concepto" class="control-label"></label>
                 <input asp-for="Concepto" class="form-control" />
                 <span asp-validation-for="Concepto" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -86,3 +86,22 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+                <style>
+        #formRef {
+        }
+
+        #formRef  div {
+            display:flex;
+            margin-bottom:5px;
+            margin-top:5px;
+        }
+
+        #formRef  div label {
+            width:40%;
+        }
+        .form-control{
+            height:40px;
+        }
+    </style>
