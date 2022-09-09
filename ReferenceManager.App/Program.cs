@@ -7,12 +7,18 @@ using ReferenceManager.App.Core.MiddlewareExtensions;
 using ReferenceManager.App.Core.SubscribeTableDependencies;
 using ReferenceManager.App.Models;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider(); ;
+builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider(); 
+
 builder.Services.AddSignalR();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 
 builder.Services.AddDbContext<DBReferenciasContext>(opt =>
 {

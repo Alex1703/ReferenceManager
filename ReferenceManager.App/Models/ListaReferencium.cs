@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ReferenceManager.App.Models
 {
@@ -13,9 +12,14 @@ namespace ReferenceManager.App.Models
 
         public int Id { get; set; }
         public bool? Activio { get; set; }
+        [Required]
+        [Display(Name = "Persona de Contacto")]
         public string PersonaContacto { get; set; }
+        [Required]
         public string Telefono { get; set; }
+        [Display(Name = "Nombre del Cliente")]
         public int? FkCliente { get; set; }
+        [Display(Name = "Tipo Referencia")]
         public int? FkTipoReferencia { get; set; }
         public string Estado { get; set; }
         public int? FkUsuario { get; set; }

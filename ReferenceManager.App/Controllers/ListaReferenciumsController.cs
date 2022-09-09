@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ReferenceManager.App.Models;
+using ReferenceManager.App.Models.Enum;
 
 namespace ReferenceManager.App.Controllers
 {
@@ -22,7 +23,6 @@ namespace ReferenceManager.App.Controllers
         // GET: ListaReferenciums
         public async Task<IActionResult> Index()
         {
-
             //var dBReferenciasContext = _context.ListaReferencia.Include(l => l.FkClienteNavigation).Include(l => l.FkUsuarioNavigation).Include(l => l.FkTipoReferenciaNavigation).Where(x => x.FkCliente == (int)TempData["idCliente"]);
             //await dBReferenciasContext.ToListAsync()
             return View();
@@ -53,19 +53,19 @@ namespace ReferenceManager.App.Controllers
         public IActionResult Create(string idCliente)
         {
             TempData["idCliente"] = Convert.ToInt32(idCliente);
-            ViewData["FkCliente"] = new SelectList(_context.Clientes
+            var fkCliente = new SelectList(_context.Clientes
                 .Where(x => x.Id == Convert.ToInt32(idCliente))
-                .Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
+                .Select(x => new { Id = x.Id, Nombre = x.FullName }), "Id", "Nombre");
             ViewData["FkUsuario"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
             var referencias = _context.ListaReferencia
                 .Include(l => l.FkClienteNavigation)
                 .Include(l => l.FkUsuarioNavigation)
                 .Include(l => l.FkTipoReferenciaNavigation)
-                .Include(l => l.FkUsuarioNavigation)
-                .Where(x => x.FkCliente == (int)TempData["idCliente"]).ToList();
+                .Where(x => x.FkCliente == Convert.ToInt32(idCliente) && x.Activio == true).ToList();
 
             ViewData["ListaReferencia"] = referencias.Count > 0 ? referencias : null;
+            ViewData["FkCliente"] = fkCliente != null ? fkCliente : null;
 
             return View();
         }
@@ -200,6 +200,17 @@ namespace ReferenceManager.App.Controllers
         private bool ListaReferenciumExists(int id)
         {
             return _context.ListaReferencia.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> FindClient(string identificacion) 
+        {
+            var Cliente = _context.Casos.Include(x => x.FkClienteNavigation).FirstOrDefault(x=>x.Estado == EstadoSolicitud.Abierto.ToString() && x.FkClienteNavigation.NoIdentificacion == Convert.ToInt64(identificacion));
+            if (Cliente !=  null)
+            {
+                return RedirectToAction(nameof(Create), new { idCliente = Cliente.FkClienteNavigation.Id });
+            }
+            TempData["Msg"] = "No se encontro el cliente";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

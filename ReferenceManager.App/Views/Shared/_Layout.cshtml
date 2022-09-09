@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="~/ReferenceManager.App.styles.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" media="screen"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
 </head>
 <body>
 
@@ -92,13 +94,15 @@
                 <a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a>
 
                 <!-- Wrapping the icon and badge -->
-                <div id="group">
+                <div id="group" style="display: flex;flex-direction: row-reverse;">
                     <a href="#" style="width: 42px;display: flex;text-decoration: none;align-items: center;" id="btnNotifica">
                         <i class="far fa-bell" style="font-size: 22px;"></i>
                         <span id="lblCountReferencias" class="badge badge-light"></span>
                     </a>
                     <div class="noti-content" style="display: none;">
-                        <div class="noti-top-arrow"></div>
+                        <div style="display: flex;justify-content: flex-end;">
+                            <div class="noti-top-arrow"></div>
+                        </div>
                         <div id="notiContent">
                             <h6 style="margin-top: 5px;text-align: center;">
                                 Referencias
@@ -131,13 +135,7 @@
     <div id="divGestionReferencias">
     </div>
 
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/main.js" asp-append-version="true"></script>
-    <script src="~/js/GestionReferenciaHub.js" asp-append-version="true"></script>
+
     <style>
         .badge {
             margin-left: -10px;
@@ -181,7 +179,7 @@
             border-style: dashed dashed solid;
             border-width: 0 8.5px 8.5px;
             position: absolute;
-            /*right: 32px;*/
+            right: 8.5%;
             top: -9px;
         }
 
@@ -203,13 +201,24 @@
             margin: 5px;
         }
     </style>
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    <script src="~/js/GestionReferenciaHub.js" asp-append-version="true"></script>
+
     <script>
         $("#btnNotifica").click(function () {
             $(".noti-content").toggle();
         });
     </script>
-    @await RenderSectionAsync("Scripts", required: false)
 
+
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

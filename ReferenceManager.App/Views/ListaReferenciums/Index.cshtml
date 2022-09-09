@@ -1,16 +1,35 @@
-﻿@model IEnumerable<ReferenceManager.App.Models.ListaReferencium>
+﻿@using Newtonsoft.Json
+@model IEnumerable<ReferenceManager.App.Models.ListaReferencium>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Buscar Cliente";
 }
 
-<h1>Index</h1>
+<h3>Buscar Cliente</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
-<label>identificacion del cliente:</label>
-<input type="text" class="form-control"/> 
+<form asp-action="FindClient">
+    <label>Identificacion del cliente:</label>
+    <input type="number" id="identificacion" name="identificacion" class="form-control" required min="99999" max="9999999999" />
+    <br />
+    <input type="submit" value="Buscar" class="btn btn-primary" />
+</form>
 
-<form></form>
+@section Scripts {
+
+    <script>
+
+        $(function () {
+            var msg = @Html.Raw(JsonConvert.SerializeObject(TempData["Msg"]));
+            if (msg != null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Alerta',
+                    text: msg
+                })
+            }
+        });
+
+    </script>
+
+}

@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <br />
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
             <input type="text" id="idCliente" name="idCliente" style="display:none" value="@TempData["idCliente"]"/>
         </form>
@@ -82,7 +82,32 @@
                         @Html.DisplayFor(modelItem => item.FkTipoReferenciaNavigation.Nombre)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
+                        @if (item.Estado == "Cambio")
+                        {
+                            <label class="bg-warning text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+
+                        }
+                        else if (item.Estado == "Deficiente")
+                        {
+                            <label class="bg-danger text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+                        }
+                        else if (item.Estado == "Buena")
+                        {
+                            <label class="bg-success text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="bg-secondary text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+                            
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FkClienteNavigation.FullName)

@@ -1,14 +1,62 @@
 ﻿@model ReferenceManager.App.Models.RefFamiliar
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-
 
 <h4>Referencia Familiar</h4>
+
 <hr />
+<div id="contentData">
+    <table id="idDataCliente" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Nombre del Cliente</th>
+                <th>Tipo Identificacion</th>
+                <th>Numero Identificacion</th>
+                <th>Nombre de Negocio</th>
+                <th>Tipo de Negocio</th>
+                <th>Direccion Negocio</th>
+                <th>Tiempo de Operacion (Años)</th>
+                <th>Tiempo de Operacion (Meses)</th>
+                <th>Tiempo de Operacion del Establecimiento(Meses)</th>
+                <th>Tiempo de Operacion del Establecimiento(Años)</th>
+                <th>Tipo Local</th>
+                <th>Tipo Vivienda</th>
+                <th>Estado Civil</th>
+            </tr>
+        </thead>
+    </table>
+    <br />
+    <div id="idDataReferencia">
+    </div>
+
+</div>
 <div class="row">
+
+    <form asp-action="SaveComentario" id="formSaveComentario">
+        <hr />
+        <div id="idTipiFicacion">
+            <label><b>Tipificacion:</b></label>
+            <select id="slTipificacion" name="slTipificacion" class="form-select" required>
+                <option value="0">Seleccione</option>
+                <option value="Se verificaron datos">Se verificaron datos</option>
+                <option value="No contestan">No contestan</option>
+                <option value="Cliente se encuentra en otro horario">Cliente se encuentra en otro horario</option>
+                <option value="Dificil ubicacion">Dificil ubicacion</option>
+            </select>
+        </div>
+        <br />
+        <div style="display:none" id="divSaveComentario">
+            <label class="form-label">Comentario:</label>
+            <textarea id="txtComentario" name="txtComentario" required class="form-control" rows="3" style="height:70px;"></textarea>
+            <input type="text" value="" id="txtIdUser" name="txtIdUser" style="display:none" />
+            <input type="text" value="" id="txtIdReferencia" name="txtIdReferencia" style="display:none" />
+            <br />
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
+
+    </form>
+</div>
+
+<div class="row" style="display:none" id="divCreate">
     <div class="">
         <form asp-action="Create" id="formRef">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -72,36 +120,87 @@
                 <input asp-for="Concepto" class="form-control" />
                 <span asp-validation-for="Concepto" class="text-danger"></span>
             </div>
+            <div style="justify-content: center;">
+                <div style="display: table-cell;border: 1px solid #c3c6cc;border-radius: 5px;margin: 5px;padding: 5px;width: 90%;">
+                    <div>
+                        <label class="form-label">Calificacion: </label>
+                        <div class="radio">
+                            <label><input type="radio" id="CheckCalificacion" name="CheckCalificacion" checked value="Buena">Buena</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" id="CheckCalificacion" name="CheckCalificacion" value="Deficiente">Deficiente</label>
+                        </div>
+                    </div>
+                    <input type="text" value="" id="txtIdUser1" name="txtIdUser1" style="display:none" />
+                    <input type="text" value="" id="txtIdReferencia1" name="txtIdReferencia1" style="display:none" />
+                    <div>
+                        <label class="form-label">Comentario: </label>
+                        <textarea class="form-control" rows="3" id="txtComentario1" name="txtComentario1" style="height: 80px;"></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+
             <div class="">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/referencia/ref.js" data-view="RefFamiliars" id="ScriptRef"></script>
+
 }
-
-
-                <style>
+    <style>
         #formRef {
         }
 
-        #formRef  div {
-            display:flex;
-            margin-bottom:5px;
-            margin-top:5px;
+            #formRef div {
+                display: flex;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+
+                #formRef div label {
+                    font-size: 14px;
+                    width: 40%;
+                }
+
+        .form-control {
+            height: 40px;
         }
 
-        #formRef  div label {
-            width:40%;
+        th {
+            font-size: 10px;
+            text-align: left;
         }
-        .form-control{
-            height:40px;
+
+        td {
+            font-size: 10px;
+            text-align: left;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        #idDataReferencia label {
+            margin: 5px;
+        }
+
+        #formSaveComentario > * {
+            margin: 5px;
         }
     </style>
+

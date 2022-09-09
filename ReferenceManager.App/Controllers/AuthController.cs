@@ -46,7 +46,7 @@ namespace ReferenceManager.App.Controllers
                     return Problem("La contraseña es incorrecta.");
                 }
 
-                string token = _tokenService.CreatedToken(usuario);                
+                string token = _tokenService.CreatedToken(usuario);
 
                 if (!string.IsNullOrEmpty(token))
                 {
@@ -151,15 +151,23 @@ namespace ReferenceManager.App.Controllers
 
         public async Task<IActionResult> LogOff()
         {
-            var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
-            var idUser = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value;
-            Usuario User = _context.Usuarios.Include(c => c.FkPerfilNavigation).FirstOrDefault(x => x.Id == int.Parse(idUser));
+            try
+            {
+                var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
+                var idUser = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value;
+                Usuario User = _context.Usuarios.Include(c => c.FkPerfilNavigation).FirstOrDefault(x => x.Id == int.Parse(idUser));
 
-            ChangeUpdateOnLine(User, OnlineStatus.Desconectado);
+                ChangeUpdateOnLine(User, OnlineStatus.Desconectado);
 
-            HttpContext.Session.Clear();
-            return Redirect("Index");
+                HttpContext.Session.Clear();
+                return Redirect("Index");
+            }
+            catch (Exception)
+            {
+                return Redirect("Index");
+            }
         }
+
 
     }
 

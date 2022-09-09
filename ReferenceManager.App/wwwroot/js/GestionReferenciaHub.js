@@ -43,19 +43,27 @@ connection.on("ReceivedGestionReferenciaByUser", function (ListReferencias) {
 
 connection.on("ReceivedGestionReferencia", function (ListReferencias) {
     var perfil = $("#lblUserActor").text();
-    debugger;
-    if (ListReferencias != null & ListReferencias.length>0) {
+    var idUser = parseInt($("#lblUserName").data("id"));
+    var List = [];
+    if (ListReferencias != null)
+        List = ListReferencias.filter(x => x.fkUsuario == idUser);
+
+    if (List.length>0) {
         BindListReferenciasInConsole(ListReferencias);
+        $("#lblCountReferencias").show();
     } else if (perfil == "Auxiliar") {
-        debugger;
         AutoAsignarReferencia();
+    } else {
+        $("#lblCountReferencias").hide();
     }
 });
 
 function BindListReferenciasInConsole(ListReferencias) {
     
     var notiItem =
-        '<div class="notiItem" style="margin: 10px;">                                                \
+        '<h6 style="margin-top: 5px;text-align: center;"> Referencias </h6>                            \
+        <hr style="margin: 5px;width: 100%;margin-left: 0px;"/>                                        \
+        <div class="notiItem" style = "margin: 10px;" >                                                \
             <a id = "linkNotiItem" href = "{UrlFull}" style = " color: #000;  text-decoration: none;">      \
                 <span style="font-weight:bolder">Tipo de Referencia </span><br/>                     \
                 <span>{TipoRef}</span><br/>                                                           \
@@ -66,10 +74,12 @@ function BindListReferenciasInConsole(ListReferencias) {
         </div> ';
 
     var content = $("#notiContent");
+    content.children().remove();
 
     var idUser = parseInt($("#lblUserName").data("id"));
 
     var List = ListReferencias.filter(x => x.fkUsuario == idUser);
+
     $("#lblCountReferencias").text(List.length)
 
     $.each(List, function (i, item) {
