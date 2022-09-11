@@ -1,0 +1,97 @@
+﻿@model ReferenceManager.App.Models.ListaReferencium
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Lista de Referencias</h4>
+<hr />
+
+@if (ViewData["ListaReferencia"] != null)
+{
+    <br />
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Persona de Contacto
+                </th>
+                <th>
+                    Telefono
+                </th>
+                <th>
+                    Tipo de Referencia
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Nombre del Cliente
+                </th>
+                <th>
+                    Nombre del Analista
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewData["ListaReferencia"] as IEnumerable<ListaReferencium>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PersonaContacto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FkTipoReferenciaNavigation.Nombre)
+                    </td>
+                    <td>
+                        @if (item.Estado == "Cambio")
+                        {
+                            <label class="bg-warning text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+
+                        }
+                        else if (item.Estado == "Deficiente")
+                        {
+                            <label class="bg-danger text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+                        }
+                        else if (item.Estado == "Buena")
+                        {
+                            <label class="bg-success text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="bg-secondary text-white" style="border-radius:5px;padding:3px;">
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </label>
+
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FkClienteNavigation.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FkUsuarioNavigation.Nombre)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

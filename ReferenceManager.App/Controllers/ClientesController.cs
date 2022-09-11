@@ -183,7 +183,7 @@ namespace ReferenceManager.App.Controllers
 
                     comercial = Casos.FkComercialNavigation;
 
-                    ViewData["IdCliente"] = Casos.FkClienteNavigation.NoIdentificacion;
+                    ViewData["IdCliente"] = Casos.FkClienteNavigation.Id;
                 }
 
                 if (comercial != null)

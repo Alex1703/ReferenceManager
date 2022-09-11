@@ -1,4 +1,5 @@
-﻿@model ReferenceManager.App.Models.Login.LoginViewModel
+﻿@using Newtonsoft.Json
+@model ReferenceManager.App.Models.Login.LoginViewModel
 
 @{
     ViewData["Title"] = "Login";
@@ -49,6 +50,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 <style>
@@ -64,7 +66,23 @@
     }
 
     #formLogin .mb-3 {
-        margin-top:30px;
-        margin-bottom:30px !important;
+        margin-top: 30px;
+        margin-bottom: 30px !important;
     }
 </style>
+
+<script>
+
+    $(function () {
+        var msg = @Html.Raw(JsonConvert.SerializeObject(TempData["Msg"]));
+        if (msg != null) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Alerta',
+                text: msg
+            })
+        }
+    });
+
+</script>
+

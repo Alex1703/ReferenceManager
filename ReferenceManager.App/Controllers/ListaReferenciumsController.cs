@@ -202,12 +202,13 @@ namespace ReferenceManager.App.Controllers
             return _context.ListaReferencia.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> FindClient(string identificacion) 
+        public async Task<IActionResult> FindClient(string identificacion,string isTitular) 
         {
-            var Cliente = _context.Casos.Include(x => x.FkClienteNavigation).FirstOrDefault(x=>x.Estado == EstadoSolicitud.Abierto.ToString() && x.FkClienteNavigation.NoIdentificacion == Convert.ToInt64(identificacion));
+             var Cliente = _context.Clientes.FirstOrDefault(x => x.Activio == true && x.NoIdentificacion == Convert.ToInt64(identificacion));
+            
             if (Cliente !=  null)
             {
-                return RedirectToAction(nameof(Create), new { idCliente = Cliente.FkClienteNavigation.Id });
+                return RedirectToAction(nameof(Create), new { idCliente = Cliente.Id });
             }
             TempData["Msg"] = "No se encontro el cliente";
             return RedirectToAction(nameof(Index));

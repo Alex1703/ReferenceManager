@@ -44,7 +44,7 @@
                         <div class="dashboard-nav-dropdown-menu">
                             <a asp-controller="Usuarios" asp-action="index" class="dashboard-nav-dropdown-item">Usuarios</a>
                             <a asp-controller="Perfils" asp-action="index" class="dashboard-nav-dropdown-item">Perfiles</a>
-                            <a asp-controller="Accesoes" asp-action="index" class="dashboard-nav-dropdown-item">Accesos</a>
+                            @*<a asp-controller="Accesoes" asp-action="index" class="dashboard-nav-dropdown-item">Accesos</a>*@
                         </div>
                     </div>
                 }
@@ -61,9 +61,9 @@
                         <div class="dashboard-nav-dropdown-menu">
                             <a asp-controller="ListaReferenciums" asp-action="index" class="dashboard-nav-dropdown-item">Agregar Referencia</a>
                         </div>
-                        <div class="dashboard-nav-dropdown-menu">
+                        @*<div class="dashboard-nav-dropdown-menu">
                             <a asp-controller="Clientes" asp-action="Create" class="dashboard-nav-dropdown-item">Actualizar Cambio</a>
-                        </div>
+                        </div>*@
                     </div>
                 }
                 @if (actor == "Coordinador Comercial" || actor == "Supervisor" || actor == "Auxiliar" || actor == "Administrador")
@@ -74,8 +74,8 @@
                             <i class="fas fa-money-check-alt"></i> Reportes
                         </a>
                         <div class="dashboard-nav-dropdown-menu">
-                            <a href="Reportes\ConsultarCliente.html" class="dashboard-nav-dropdown-item">Consultar Cliente</a>
-                            <a href="Reportes\GenerarPDF.html" class="dashboard-nav-dropdown-item">Generar PDF's</a>
+                            <a asp-controller="Reportes" asp-action="ConsultarCliente" class="dashboard-nav-dropdown-item">Generar PDF's</a>
+                            <a asp-controller="Reportes" asp-action="Index" class="dashboard-nav-dropdown-item">Consultar Cliente</a>
 
                         </div>
 
@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                <div id="UserData" style="display: flex;justify-content: center;flex-direction: column;">
+                <div id="UserData" class="no-print" style="display: flex;justify-content: center;flex-direction: column;">
                     <label id="lblUserName" data-id="@idUsuario" style="font-style: oblique; font-weight: bold;">@name</label>
                     <hr style="margin: 0px;">
                     <label id="lblUserActor" style="font-size: 13px; margin-left: 23%;">@actor</label>

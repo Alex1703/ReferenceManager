@@ -1,0 +1,121 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<ReferenceManager.App.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="no-print">Consulta Caso</h3>
+
+
+<div asp-action="FindClient" class="no-print">
+    <label>Identificacion del Cliente:</label>
+    <input type="number" id="identificacion" name="identificacion" class="form-control" required min="99999" max="9999999999" />
+    <br />
+    <input type="button" id="btnBuscarCliente" value="Buscar" class="btn btn-primary" />
+    <input type="button" id="btnExportar" value="Exportar" class="btn btn-success" style="display:none" />
+</div>
+
+<div id="divComercial"></div>
+<div id="divClientes">
+    <div class="divTitular"></div>
+    <div class="divCodeudor"></div>
+</div>
+<div id="divReferencias">
+    <div class="divTitular"></div>
+    <div class="divCodeudor"></div>
+</div>
+<div id="divDetalleReferencias"></div>
+
+
+@section Scripts {
+
+    <script>
+
+        $(function () {
+            var msg = @Html.Raw(JsonConvert.SerializeObject(TempData["Msg"]));
+            if (msg != null) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Alerta',
+                    text: msg
+                })
+            }
+        });
+
+    </script>
+    <script src="~/js/report.js"></script>
+}
+
+    <style>
+        @@print {
+            @@page :footer {
+                display: none
+            }
+
+            @@page :header {
+                display: none
+            }
+        }
+
+        @@media print {
+
+
+            .no-print, .no-print * {
+                display: none !important;
+            }
+        }
+
+        #formRef {
+        }
+
+            #formRef div {
+                display: flex;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+
+                #formRef div label {
+                    font-size: 14px;
+                    width: 40%;
+                }
+
+        .form-control {
+            height: 40px;
+        }
+
+        th {
+            font-size: 10px;
+            text-align: left;
+        }
+
+        td {
+            font-size: 10px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        #idDataReferencia label {
+            margin: 5px;
+        }
+
+        #formSaveComentario > * {
+            margin: 5px;
+        }
+
+        h6 {
+            margin-top: 10px;
+            font-weight: bold
+        }
+    </style>

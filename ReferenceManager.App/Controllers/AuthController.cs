@@ -39,11 +39,13 @@ namespace ReferenceManager.App.Controllers
                 var usuario = await GetUsuarioByCorreo(model.Username);
                 if (usuario == null)
                 {
-                    return Problem("Usuario no registrado.");
+                    TempData["Msg"] = "Usuario no registrado.";
+                    return View();
                 }
                 else if (!VerifyPasswordHash(model.Password, usuario.Contrasena, usuario.ContrasenaKey))
                 {
-                    return Problem("La contraseña es incorrecta.");
+                    TempData["Msg"] = "La contraseña es incorrecta.";
+                    return View();
                 }
 
                 string token = _tokenService.CreatedToken(usuario);
