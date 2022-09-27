@@ -53,35 +53,34 @@ namespace ReferenceManager.App.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+
+                _context.Add(refArrendadorLocal);
+                await _context.SaveChangesAsync();
+
+                //Se guarda el comentario en el detalle de la comunicacion
+                var Comunicacion = new DetalleComunicacion()
                 {
-                    _context.Add(refArrendadorLocal);
-                    await _context.SaveChangesAsync();
-
-                    //Se guarda el comentario en el detalle de la comunicacion
-                    var Comunicacion = new DetalleComunicacion()
-                    {
-                        Descripcion = txtComentario1,
-                        FkUsuario = Convert.ToInt32(txtIdUser1),
-                        FkListaReferencia = (int)txtIdReferencia1,
-                        FkRefArrendadorLocal = refArrendadorLocal.Id
-                    };
-                    _context.Add(Comunicacion);
-                    await _context.SaveChangesAsync();
+                    Descripcion = txtComentario1,
+                    FkUsuario = Convert.ToInt32(txtIdUser1),
+                    FkListaReferencia = (int)txtIdReferencia1,
+                    FkRefArrendadorLocal = refArrendadorLocal.Id
+                };
+                _context.Add(Comunicacion);
+                await _context.SaveChangesAsync();
 
 
-                    //Se cambia el estado de la referencia 
-                    var estado = CheckCalificacion == "Buena" ? EstadoGestion.Buena : EstadoGestion.Deficiente;
-                    await ChangeRefercesStatus(Convert.ToInt32(txtIdReferencia1), estado);
+                //Se cambia el estado de la referencia 
+                var estado = CheckCalificacion == "Buena" ? EstadoGestion.Buena : EstadoGestion.Deficiente;
+                await ChangeRefercesStatus(Convert.ToInt32(txtIdReferencia1), estado);
 
-                    //Se cambia el estado de la asignacion 
+                //Se cambia el estado de la asignacion 
 
-                    await ChangeManagementStatus(Convert.ToInt32(txtIdReferencia1), Convert.ToInt32(txtIdUser1), EstadoGestion.Gestionada);
+                await ChangeManagementStatus(Convert.ToInt32(txtIdReferencia1), Convert.ToInt32(txtIdUser1), EstadoGestion.Gestionada);
 
-                    var idCliente = _context.ListaReferencia.FirstOrDefault(x => x.Id == (int)txtIdReferencia1).FkCliente;
+                var idCliente = _context.ListaReferencia.FirstOrDefault(x => x.Id == (int)txtIdReferencia1).FkCliente;
 
-                    return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = idCliente });
-                }
+                return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = idCliente });
+
 
             }
             catch (Exception)
@@ -121,26 +120,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(refArrendadorLocal);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RefArrendadorLocalExists(refArrendadorLocal.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(refArrendadorLocal);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RefArrendadorLocalExists(refArrendadorLocal.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             return View(refArrendadorLocal);
         }
 
@@ -219,13 +217,18 @@ namespace ReferenceManager.App.Controllers
         public async Task ChangeManagementStatus(int idReferencia, int idUser, EstadoGestion estado)
         {
             var gestion = _context.GestionReferencia.FirstOrDefault(x => x.FkListaReferencia == idReferencia && x.FkUsuario == idUser && x.Estado == EstadoGestion.Asignado.ToString());
-            gestion.Estado = estado.ToString();
-            if (estado == EstadoGestion.EnCola)
+            if (gestion != null)
             {
-                gestion.FkUsuario = null;
+                gestion.Estado = estado.ToString();
+                if (estado == EstadoGestion.EnCola)
+                {
+                    gestion.FkUsuario = null;
+                }
+                _context.Update(gestion);
+                await _context.SaveChangesAsync();
+
             }
-            _context.Update(gestion);
-            await _context.SaveChangesAsync();
+
         }
 
         public async Task ChangeRefercesStatus(int idReferencia, EstadoGestion estado)

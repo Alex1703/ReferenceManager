@@ -56,12 +56,10 @@ namespace ReferenceManager.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Activio,FkPerfil,FkAcceso")] DetallePerfilAcceso detallePerfilAcceso)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(detallePerfilAcceso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            _context.Add(detallePerfilAcceso);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             ViewData["FkAcceso"] = new SelectList(_context.Accesos, "Id", "Id", detallePerfilAcceso.FkAcceso);
             ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Id", detallePerfilAcceso.FkPerfil);
             return View(detallePerfilAcceso);
@@ -97,26 +95,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(detallePerfilAcceso);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DetallePerfilAccesoExists(detallePerfilAcceso.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(detallePerfilAcceso);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!DetallePerfilAccesoExists(detallePerfilAcceso.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             ViewData["FkAcceso"] = new SelectList(_context.Accesos, "Id", "Id", detallePerfilAcceso.FkAcceso);
             ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Id", detallePerfilAcceso.FkPerfil);
             return View(detallePerfilAcceso);

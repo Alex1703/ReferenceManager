@@ -16,9 +16,7 @@ namespace ReferenceManager.App.Controllers
         // GET: Perfils
         public async Task<IActionResult> Index()
         {
-            return _context.Perfils != null ?
-                        View(await _context.Perfils.ToListAsync()) :
-                        Problem("Entity set 'DBReferenciasContext.Perfils'  is null.");
+            return _context.Perfils != null ? View(await _context.Perfils.ToListAsync()) : Problem("Entity set 'DBReferenciasContext.Perfils'  is null.");
         }
 
         // GET: Perfils/Details/5
@@ -52,12 +50,11 @@ namespace ReferenceManager.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,Activio")] Perfil perfil)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(perfil);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+
+            _context.Add(perfil);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             return View(perfil);
         }
 
@@ -89,26 +86,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(perfil);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PerfilExists(perfil.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(perfil);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PerfilExists(perfil.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             return View(perfil);
         }
 

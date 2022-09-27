@@ -52,12 +52,11 @@ namespace ReferenceManager.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Activio,Modulo,Url")] Acceso acceso)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(acceso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+
+            _context.Add(acceso);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             return View(acceso);
         }
 
@@ -89,27 +88,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(acceso);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AccesoExists(acceso.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(acceso);
+                await _context.SaveChangesAsync();
             }
-            return View(acceso);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AccesoExists(acceso.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
+
         }
 
         // GET: Accesoes/Delete/5

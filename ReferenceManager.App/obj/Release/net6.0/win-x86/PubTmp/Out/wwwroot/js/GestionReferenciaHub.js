@@ -48,11 +48,12 @@ connection.on("ReceivedGestionReferencia", function (ListReferencias) {
     if (ListReferencias != null)
         List = ListReferencias.filter(x => x.fkUsuario == idUser);
 
-    if (List.length>0) {
-        BindListReferenciasInConsole(ListReferencias);
-        $("#lblCountReferencias").show();
-    } else if (perfil == "Auxiliar") {
+    if (ListReferencias.length > 0 && List.length == 0 && perfil == "Auxiliar") {
         AutoAsignarReferencia();
+    }
+    if (List.length>0) {
+        BindListReferenciasInConsole(List);
+        $("#lblCountReferencias").show();
     } else {
         $("#lblCountReferencias").hide();
     }

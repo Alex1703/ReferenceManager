@@ -77,15 +77,14 @@ namespace ReferenceManager.App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Activio,PersonaContacto,Telefono,FkCliente,FkTipoReferencia,Estado,FkPerfilAnalista")] ListaReferencium listaReferencium, string idCliente)
         {
-            if (ModelState.IsValid)
-            {
-                var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
-                var idUser = Convert.ToInt32(jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value);
 
-                listaReferencium.FkUsuario = idUser;
-                _context.Add(listaReferencium);
-                await _context.SaveChangesAsync();
-            }
+            var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
+            var idUser = Convert.ToInt32(jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value);
+
+            listaReferencium.FkUsuario = idUser;
+            _context.Add(listaReferencium);
+            await _context.SaveChangesAsync();
+
             ViewData["FkCliente"] = new SelectList(_context.Clientes.Select(x => new { Id = x.Id, Nombre = x.PrimerNombre + " " + x.SegundoNombre + " " + x.PrimerApellido + " " + x.SegundoApellido }), "Id", "Nombre");
             ViewData["FkUsuarios"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Nombre");
@@ -132,26 +131,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(listaReferencium);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ListaReferenciumExists(listaReferencium.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(listaReferencium);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ListaReferenciumExists(listaReferencium.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             ViewData["FkCliente"] = new SelectList(_context.Clientes, "Id", "Id", listaReferencium.FkCliente);
             ViewData["FkTipoReferencia"] = new SelectList(_context.TipoReferencia, "Id", "Id", listaReferencium.FkTipoReferencia);
             return View(listaReferencium);
@@ -202,11 +200,11 @@ namespace ReferenceManager.App.Controllers
             return _context.ListaReferencia.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> FindClient(string identificacion,string isTitular) 
+        public async Task<IActionResult> FindClient(string identificacion, string isTitular)
         {
-             var Cliente = _context.Clientes.FirstOrDefault(x => x.Activio == true && x.NoIdentificacion == Convert.ToInt64(identificacion));
-            
-            if (Cliente !=  null)
+            var Cliente = _context.Clientes.FirstOrDefault(x => x.Activio == true && x.NoIdentificacion == Convert.ToInt64(identificacion));
+
+            if (Cliente != null)
             {
                 return RedirectToAction(nameof(Create), new { idCliente = Cliente.Id });
             }

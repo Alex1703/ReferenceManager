@@ -53,16 +53,14 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Cliente cliente,string txtIdComercial)
+        public async Task<IActionResult> Create(Cliente cliente, string txtIdComercial)
         {
-            if (ModelState.IsValid)
-            {
-                cliente.FkCliente = cliente.FkCliente == 0 ? null : cliente.FkCliente;
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                CreateCaso(cliente,Convert.ToInt32(txtIdComercial));
-                return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = cliente.Id });
-            }
+            cliente.FkCliente = cliente.FkCliente == 0 ? null : cliente.FkCliente;
+            _context.Add(cliente);
+            await _context.SaveChangesAsync();
+            CreateCaso(cliente, Convert.ToInt32(txtIdComercial));
+            return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = cliente.Id });
+
             ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Nombre", cliente.FkTipoCliente);
             return View();
         }
@@ -96,28 +94,28 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
+                _context.Update(cliente);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClienteExists(cliente.Id))
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ClienteExists(cliente.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["FkTipoCliente"] = new SelectList(_context.TipoClientes, "Id", "Id", cliente.FkTipoCliente);
-            return View(cliente);
+            return RedirectToAction(nameof(Index));
+
+            
+            
         }
 
         // GET: Clientes/Delete/5
@@ -222,13 +220,13 @@ namespace ReferenceManager.App.Controllers
             }
         }
 
-        private void CreateCaso(Cliente cliente, int idComercial) 
+        private void CreateCaso(Cliente cliente, int idComercial)
         {
             try
             {
                 var caso = new Caso()
                 {
-                    FkCliente = cliente.FkCliente,
+                    FkCliente = cliente.Id,
                     FkComercial = idComercial
                 };
                 _context.Add(caso);

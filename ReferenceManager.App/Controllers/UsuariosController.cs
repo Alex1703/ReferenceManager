@@ -56,19 +56,17 @@ namespace ReferenceManager.App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,Identificacion,Correo,FkPerfil")] Usuario usuario)
+        public async Task<IActionResult> Create(Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
-                usuario.CambioContrasena = DateTime.Now.AddMonths(int.Parse(_configuration.GetSection("PasswordChangePeriod").Value));
-                CreatePasswordHash(_configuration.GetSection("PasswordDefault").Value, out byte[] passwordHast, out byte[] passwordSalt);
-                usuario.Contrasena = passwordHast;
-                usuario.ContrasenaKey = passwordSalt;
-                usuario.Correo = usuario.Correo.ToLower();
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            usuario.CambioContrasena = DateTime.Now.AddMonths(int.Parse(_configuration.GetSection("PasswordChangePeriod").Value));
+            CreatePasswordHash(_configuration.GetSection("PasswordDefault").Value, out byte[] passwordHast, out byte[] passwordSalt);
+            usuario.Contrasena = passwordHast;
+            usuario.ContrasenaKey = passwordSalt;
+            usuario.Correo = usuario.Correo.ToLower();
+            _context.Add(usuario);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
             ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Nombre", usuario.FkPerfil);
             return View(usuario);
         }
@@ -102,26 +100,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UsuarioExists(usuario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(usuario.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             ViewData["FkPerfil"] = new SelectList(_context.Perfils, "Id", "Id", usuario.FkPerfil);
             return View(usuario);
         }

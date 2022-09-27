@@ -33,8 +33,7 @@ namespace ReferenceManager.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Models.Login.LoginViewModel model)
         {
-            if (ModelState.IsValid)
-            {
+           
                 IActionResult response = Unauthorized();
                 var usuario = await GetUsuarioByCorreo(model.Username);
                 if (usuario == null)
@@ -65,7 +64,7 @@ namespace ReferenceManager.App.Controllers
                     return RedirectToAction("ChangePassword");
                 }
                 return RedirectToAction("Index", "Home");
-            }
+            
             return View();
         }
 
@@ -94,8 +93,6 @@ namespace ReferenceManager.App.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(LoginChangePassword model)
         {
-            if (ModelState.IsValid)
-            {
                 var jwtSecurityToken = new JwtSecurityTokenHandler().ReadJwtToken(HttpContext.Session.GetString("JWToken"));
                 var idUser = jwtSecurityToken.Claims.FirstOrDefault(x => x.Type == "IdUsuario").Value;
                 Usuario User = _context.Usuarios.Include(c => c.FkPerfilNavigation).FirstOrDefault(x => x.Id == int.Parse(idUser));
@@ -115,7 +112,7 @@ namespace ReferenceManager.App.Controllers
                 }
 
                 return RedirectToAction("Index", "Home");
-            }
+            
             return View();
         }
 

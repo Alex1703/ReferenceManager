@@ -53,45 +53,44 @@ namespace ReferenceManager.App.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+
+                _context.Add(refProveedor);
+                await _context.SaveChangesAsync();
+
+
+
+                //Se guarda el comentario en el detalle de la comunicacion
+                var Comunicacion = new DetalleComunicacion()
                 {
-                    _context.Add(refProveedor);
-                    await _context.SaveChangesAsync();
+                    Descripcion = txtComentario1,
+                    FkUsuario = Convert.ToInt32(txtIdUser1),
+                    FkListaReferencia = (int)txtIdReferencia1,
+                    FkRefProveedor = refProveedor.Id
+                };
+                _context.Add(Comunicacion);
+                await _context.SaveChangesAsync();
 
 
+                //Se cambia el estado de la referencia 
+                var estado = CheckCalificacion == "Buena" ? EstadoGestion.Buena : EstadoGestion.Deficiente;
+                await ChangeRefercesStatus(Convert.ToInt32(txtIdReferencia1), estado);
 
-                    //Se guarda el comentario en el detalle de la comunicacion
-                    var Comunicacion = new DetalleComunicacion()
-                    {
-                        Descripcion = txtComentario1,
-                        FkUsuario = Convert.ToInt32(txtIdUser1),
-                        FkListaReferencia = (int)txtIdReferencia1,
-                        FkRefProveedor = refProveedor.Id
-                    };
-                    _context.Add(Comunicacion);
-                    await _context.SaveChangesAsync();
+                //Se cambia el estado de la asignacion 
+
+                await ChangeManagementStatus(Convert.ToInt32(txtIdReferencia1), Convert.ToInt32(txtIdUser1), EstadoGestion.Gestionada);
+
+                var idCliente = _context.ListaReferencia.FirstOrDefault(x => x.Id == (int)txtIdReferencia1).FkCliente;
+
+                return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = idCliente });
 
 
-                    //Se cambia el estado de la referencia 
-                    var estado = CheckCalificacion == "Buena" ? EstadoGestion.Buena : EstadoGestion.Deficiente;
-                    await ChangeRefercesStatus(Convert.ToInt32(txtIdReferencia1), estado);
-
-                    //Se cambia el estado de la asignacion 
-
-                    await ChangeManagementStatus(Convert.ToInt32(txtIdReferencia1), Convert.ToInt32(txtIdUser1), EstadoGestion.Gestionada);
-
-                    var idCliente = _context.ListaReferencia.FirstOrDefault(x => x.Id == (int)txtIdReferencia1).FkCliente;
-
-                    return RedirectToAction(nameof(Create), "ListaReferenciums", new { idCliente = idCliente });
-                    
-                }
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
+
             return View(refProveedor);
         }
 
@@ -123,26 +122,25 @@ namespace ReferenceManager.App.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+
+            try
             {
-                try
-                {
-                    _context.Update(refProveedor);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RefProveedorExists(refProveedor.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(refProveedor);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RefProveedorExists(refProveedor.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+
             return View(refProveedor);
         }
 
